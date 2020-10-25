@@ -20,7 +20,7 @@
                 <div class="row align-items-center no-gutters">
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="hus/img/logo.png" alt="">
                             </a>
                         </div>
@@ -29,22 +29,7 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a class="active" href="index.html">home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="#">pages</a>
-                                        <ul class="submenu">
-                                                <li><a href="facilites.html">Facilities</a></li>
-                                                <li><a href="property.html">Properties</a></li>
-                                                <li><a href="elements.html">elements</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">blog</a></li>
-                                            <li><a href="single-blog.html">single-blog</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a class="active" href="/">home</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -52,10 +37,10 @@
                     <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                         <div class="social_wrap d-flex align-items-center justify-content-end">
                             <div class="login_text">
-                                <a href="#">Login</a>
+                                <a href="/LoginPage">Login</a>
                             </div>
-                            <div class="number">
-                                <p>Call us <a href="#">+001 325 589</a></p>
+                            <div class="login_text">
+                                <a href="/RegisterPage" class="genric-btn danger">Register</a>
                             </div>
                         </div>
                     </div>
