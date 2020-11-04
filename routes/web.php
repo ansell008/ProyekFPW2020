@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'UserAction@index');
 Route::get('/RegisterPage','UserAction@goToRegister');
 Route::get('/LoginPage','UserAction@goToLogin');
+Route::any('/home', 'HomeCont@index');

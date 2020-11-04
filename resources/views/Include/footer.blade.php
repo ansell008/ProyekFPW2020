@@ -1,4 +1,5 @@
 @section('footer')
+<div style="float: none"></div>
 <footer class="footer footer_bg_1">
     <div class="footer_top">
         <div class="container">
