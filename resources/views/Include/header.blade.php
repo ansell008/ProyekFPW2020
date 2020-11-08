@@ -21,7 +21,7 @@
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
                             <a href="/">
-                                <img src="hus/img/logo.png" alt="">
+                                <img src="logo.png" alt="" style="width: 100px">
                             </a>
                         </div>
                     </div>
