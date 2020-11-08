@@ -16,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'UserAction@index');
 Route::get('/RegisterPage','UserAction@goToRegister');
 Route::get('/LoginPage','UserAction@goToLogin');
-Route::any('/home', 'HomeCont@index');
+Route::post('/register', 'UserAction@register');
+Route::post('/login', 'UserAction@login');
+
+
+Route::any('/homecustomer', 'CustomerController@index');
+Route::any('/homeseller', 'SellerController@index');
