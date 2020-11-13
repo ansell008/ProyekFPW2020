@@ -26,3 +26,4 @@ Route::any('/homecustomer', 'CustomerController@index');
 
 //SELLER
 Route::any('/homeseller', 'SellerController@index');
+Route::get('/viewaddapartment', 'SellerController@viewAddApartment');

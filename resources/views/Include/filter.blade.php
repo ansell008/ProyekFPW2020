@@ -32,8 +32,8 @@
                                 @if ($aktif_user->user_tipe == 0)
                                     <ul id="navigation">
                                         <li><a href="/homeseller">List Apartment</a></li>
-                                        <li><a href="about.html">Add Apartment</a></li>
-                                        <li><a href="contact.html">List Order</a></li>
+                                        <li><a href="/viewaddapartment">Add Apartment</a></li>
+                                        <li><a href="/viewlistorder">List Order</a></li>
                                     </ul>
                                 @else
                                     <div class="dropdown show" style="display: inline">
