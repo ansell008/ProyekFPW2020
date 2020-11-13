@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//USER
 Route::get('/', 'UserAction@index');
-Route::get('/RegisterPage','UserAction@goToRegister');
-Route::get('/LoginPage','UserAction@goToLogin');
+Route::get('/RegisterPage', 'UserAction@goToRegister');
+Route::get('/LoginPage', 'UserAction@goToLogin');
 Route::post('/register', 'UserAction@register');
 Route::post('/login', 'UserAction@login');
 
-
+//CUSTOMER
 Route::any('/homecustomer', 'CustomerController@index');
+
+
+//SELLER
 Route::any('/homeseller', 'SellerController@index');

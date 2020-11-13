@@ -15,7 +15,7 @@ class CreateTipeApartmentsTable extends Migration
     {
         Schema::create('Tipe_apartment', function (Blueprint $table) {
             $table->integerIncrements("tipe_apartment_id");
-            $table->string("tipe_apartment_nama",50);
+            $table->string("tipe_apartment_nama", 50);
             $table->longText("tipe_apartment_deskripsi");
             $table->timestamps();
         });

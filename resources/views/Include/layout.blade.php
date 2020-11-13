@@ -4,3 +4,4 @@
 @yield('content')
 <div style="float: none"></div>
 @yield('footer')
+@yield('script')

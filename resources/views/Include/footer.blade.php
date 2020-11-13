@@ -136,6 +136,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="hus/js/jquery.validate.min.js"></script>
 <script src="hus/js/mail-script.js"></script>
 
-
 <script src="hus/js/main.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection
