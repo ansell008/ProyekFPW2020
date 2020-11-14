@@ -20,13 +20,13 @@ class CreateApartmentsTable extends Migration
             $table->integer("kategori_id")->unsigned();
             $table->integer("negara_id")->unsigned();
             $table->integer("kota_id")->unsigned();
-            $table->string("apartment_nama",255);
+            $table->string("apartment_nama", 255);
             $table->integer("apartment_harga");
-            $table->string("apartment_alamat",255);
+            $table->string("apartment_alamat", 255);
             $table->longText("apartment_deskripsi");
-            $table->float("apaartment_rating");
+            $table->float("apartment_rating");
             $table->integer("apartment_status")->default(0);
-            $table->string("apartment_foto",255);
+            $table->string("apartment_foto", 255);
             $table->integer("apartment_tahun_bangun");
 
             $table->foreign("user_id")->references("user_id")->on("User");

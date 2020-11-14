@@ -53,15 +53,24 @@
           </tr>
         </thead>
         <tbody>
-            <td>1</td>
-            <td>Grand Surya</td>
-            <td>Rp 2000000</td>
-            <td>23-11-2020</td>
-            <td>Available</td>
-            <td>
-                <a type="button" class="genric-btn success radius" href="">Detail</a>
-                <a type="button" class="genric-btn danger radius" href="">Delete</a>
-            </td>
+            @foreach ($allApartment as $item)
+                @if ($item->user_id == $aktif_user->user_id)
+                    <td>{{$item->user_id}}</td>
+                    <td>{{$item->apartment_nama}}</td>
+                    <td>Rp @currency($item->apartment_harga)</td>
+                    <td>{{$item->created_at}}</td>
+                    @if ($item->apartment_status == 0)
+                        <td><span class="badge badge-success">Available</span></td>
+                    @else
+                        <td><span class="badge badge-danger">Not Available</span></td>
+                    @endif
+                    <td>
+                        <a type="button" class="genric-btn success radius" href="detailapartment/{{$item->apartment_id}}">Detail</a>
+                        <a type="button" class="genric-btn danger radius" href="deleteapartment/{{$item->apartment_id}}">Delete</a>
+                    </td>
+                @endif
+            @endforeach
+
         </tbody>
       </table>
 </div>

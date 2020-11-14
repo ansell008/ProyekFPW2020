@@ -31,28 +31,43 @@
 #listApart_filter{
     float: right;
 }
+
 </style>
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <div class="luar">
-    <div class="typography" style="margin-left: 45%">
+    <div class="typography" style="margin-left: 45%" id="a">
         <h1>Add Apartment</h1>
     </div>
     <br>
-    <form action="#" method="POST">
+    <form action="/addapartment" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="typography">
             <h4>Apartment Name : </h4>
         </div>
         <div class="mt-10">
-            <input type="text" name="first_name" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
+            <input type="text" name="nama" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
         </div>
         <br>
         <div class="typography">
             <h4>Category</h4>
         </div>
         <div class="default-select mt-10"  id="default-select" "="">
-            <select style="display: none;">
-                <option value=" 1">Jual</option>
-                <option value=" 1">Sewa</option>
+            <select style="display: none;" name="kategori">
+                @foreach ($allKategori as $item)
+                    <option value="{{$item->kategori_id}}">{{$item->kategori_nama}}</option>
+                @endforeach
+            </select>
+        </div>
+        <br>
+        <div class="typography">
+            <h4>Type Apartment</h4>
+        </div>
+        <div class="default-select mt-10"  id="default-select" "="">
+            <select style="display: none;" id="tipe" name="tipe">
+                @foreach ($allTipeApartment as $item)
+                    <option value="{{$item->tipe_apartment_id}}">{{$item->tipe_apartment_nama}}</option>
+                @endforeach
             </select>
         </div>
         <br>
@@ -62,11 +77,10 @@
         <div class="input-group-icon mt-10">
             <div class="icon" style="margin-top: 11px;"><i class="fa fa-globe" aria-hidden="true"></i></div>
             <div class="form-select" id="default-select" "="">
-                <select style="display: none;">
-                    <option value="1">Bangladesh</option>
-                    <option value="1">India</option>
-                    <option value="1">England</option>
-                    <option value="1">Srilanka</option>
+                <select style="display: none;" id="negara" name="negara">
+                    @foreach ($allNegara as $item)
+                        <option value="{{$item->negara_id}}">{{$item->negara_nama}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -76,12 +90,13 @@
         </div>
         <div class="input-group-icon mt-10">
             <div class="icon" style="margin-top: 11px;"><i class="fa fa-plane" aria-hidden="true"></i></div>
-            <div class="form-select" id="default-select" "="">
-                <select style="display: none;">
-                    <option value="1">Dhaka</option>
-                    <option value="1">Dilli</option>
-                    <option value="1">Newyork</option>
-                    <option value="1">Islamabad</option>
+            <div class="form-select" id="cbKota">
+                <select style="display: none;" id="kota" name="kota">
+                    @foreach ($allKota as $item)
+                        @if ($item->negara_id == 1)
+                            <option value="{{$item->kota_id}}">{{$item->kota_nama}}</option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -91,29 +106,38 @@
         </div>
         <div class="input-group-icon mt-10">
             <div class="icon"  style="margin-top: 11px;"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-            <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required="" class="single-input">
+            <input type="text" name="alamat" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required="" class="single-input">
         </div>
         <br>
         <div class="typography">
             <h4>Price</h4>
         </div>
         <div class="mt-10">
-            <input type="number" name="first_name" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input">
+            <input type="number" name="harga" min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input">
         </div>
         <br>
         <div class="typography">
-            <h4>Select Foto</h4>
+            <h4>Built Year</h4>
         </div>
         <div class="mt-10">
-            <input type="file" name="first_name" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
+            <input type="number" name="tahun_bangun" name="build" min="1800" max="2021" placeholder="Build Year" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Build Year'" required="" class="single-input">
+        </div>
+        <br>
+        <div class="typography">
+            <h4>Select Photo</h4>
+        </div>
+        <div class="mt-10">
+            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
         </div>
         <br>
         <div class="typography">
             <h4>Description</h4>
         </div>
         <div class="mt-10">
-            <textarea class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required=""></textarea>
+            <textarea name="deskripsi" class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required=""></textarea>
         </div>
+        <br>
+        <input type="hidden" name="user_id" value="{{ $aktif_user->user_id }}">
         <button class="genric-btn info radius" type="submit">Add</button>
     </form>
 
@@ -126,7 +150,26 @@
 
 @section('script')
 <script>
-
+        $(document).ready(function () {
+            // $( "#build" ).datepicker({dateFormat: 'yy'});
+        });
+        $("#negara").change(function () {
+            var negara = $("#negara").val();
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+            // alert(_token)
+            $.ajax({
+          		type: 'POST',
+              	url: "/getkota",
+              	data: {
+                    negara: negara,
+                    _token : _token
+                      },
+              	cache: false,
+              	success: function(msg){
+                    $("#tipe").html(msg);
+                }
+            });
+        });
 </script>
 @endsection
 
