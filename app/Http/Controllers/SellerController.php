@@ -104,6 +104,6 @@ class SellerController extends Controller
     public function viewListOrder(Request $req)
     {
         $aktif_user = $req->session()->get("aktif_user");
-        return view("addApartment", [["aktif_user" => $aktif_user]]);
+        return view("Seller.listOrder", ["aktif_user" => $aktif_user]);
     }
 }

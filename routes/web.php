@@ -23,12 +23,12 @@ Route::post('/login', 'UserAction@login');
 //CUSTOMER
 Route::any('/homecustomer', 'CustomerController@index');
 
-
 //SELLER
 Route::any('/homeseller', 'SellerController@index');
 Route::get('/viewaddapartment', 'SellerController@viewAddApartment');
 Route::post('/getkota', 'SellerController@GetKota');
 Route::post('/addapartment', 'SellerController@AddApartment');
 Route::get('/detailapartment', 'SellerController@DetailApartment');
+Route::get('/viewlistorder' . 'SellerController@viewListOrder');
 
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
