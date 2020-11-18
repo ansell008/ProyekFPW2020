@@ -36,29 +36,39 @@
                                         <li><a href="/viewlistorder">List Order</a></li>
                                     </ul>
                                 @else
-                                    <div class="dropdown show" style="display: inline">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Country
-                                        </a>
+                                    <style>
+                                        .header-area .main-header-area .main-menu ul li{
+                                            display: block;
+                                        }
+                                    </style>
+                                <div class="form-group" style="width: 100px;display:inline">
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Taiwan</a>
-                                        <a class="dropdown-item" href="#">Indonesia</a>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        @isset($negara)
+                                        @foreach ($negara as $n)
+                                        <option value="{{$n->negara_nama}}">{{$n->negara_nama}}</option>
+                                        @endforeach
 
-                                        </div>
-                                    </div>
+                                        @endisset
+                                    </select>
+                                  </div>
 
-                                    <div class="dropdown show" style="display: inline;margin-left:5px">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        City
-                                        </a>
+                                  <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Taipe</a>
-                                        <a class="dropdown-item" href="#">Jakarta</a>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        @isset($kota)
+                                        @foreach ($kota as $k)
+                                        <option value="{{$k->kota_nama}}">{{$k->kota_nama}}</option>
+                                        @endforeach
 
-                                        </div>
-                                    </div>
+                                        @endisset
+                                    </select>
+                                  </div>
+                                <div style="float: none"></div>
+                             <button type="button" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
+
+
+
                                 @endif
 
                             </nav>
@@ -67,11 +77,13 @@
                     <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                         <div class="social_wrap d-flex align-items-center justify-content-end">
                             <div class="login_text">
-                                <a href="/LoginPage">Logout</a>
+                            <a href="" style="color: white">Hello, {{$aktif_user->user_nama}}</a>
+                            <a href="/LoginPage">Logout</a>
                             </div>
 
                         </div>
                     </div>
+
                     <div class="col-12">
                         <div class="mobile_menu d-block d-lg-none"></div>
                     </div>

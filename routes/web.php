@@ -32,3 +32,4 @@ Route::get('/detailapartment', 'SellerController@DetailApartment');
 Route::get('/viewlistorder' . 'SellerController@viewListOrder');
 
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
+Route::get('/detail/{id}', 'CustomerController@detail');

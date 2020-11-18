@@ -32,97 +32,21 @@
 </style>
 @section('content')
 <div class="luar">
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement</h5>
-          <p class="card-text">Apartement ini sangat bagus</p>
-          <a href="#" class="btn btn-primary">More Detail</a>
-        </div>
-      </div>
+    @isset($posting)
+        @foreach ($posting as $p)
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">{{$p->apartment_nama}}</h5>
+              <p class="card-text">{{$p->user_nama}}</p>
+                <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
+            </div>
+          </div>
+        @endforeach
+    @endisset
 
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
 
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nama Apartement2</h5>
-          <p class="card-text">Apartement ini sangat bagus2</p>
-          <a href="#" class="btn btn-primary">More Detail2</a>
-        </div>
-      </div>
-      <div class="cb"></div>
+
 </div>
 
 
