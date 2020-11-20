@@ -23,13 +23,26 @@ Route::post('/login', 'UserAction@login');
 //CUSTOMER
 Route::any('/homecustomer', 'CustomerController@index');
 
+// apartmentstatus
+// 0 = tersedia
+// 1 = menunggu admin
+// 2 = diterima
+// -2 ditolak
+// -1 = dihapus
+
 //SELLER
 Route::any('/homeseller', 'SellerController@index');
 Route::get('/viewaddapartment', 'SellerController@viewAddApartment');
 Route::post('/getkota', 'SellerController@GetKota');
 Route::post('/addapartment', 'SellerController@AddApartment');
-Route::get('/detailapartment', 'SellerController@DetailApartment');
-Route::get('/viewlistorder' . 'SellerController@viewListOrder');
+
+Route::get('/detailapartment/{id}', 'SellerController@DetailApartment');
+Route::get('/viewdetailapartment', 'SellerController@viewDetailApartment');
+
+Route::get('/deleteapartment/{id}', 'SellerController@DeleteApartment');
 
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
+
+Route::get('/viewlistorder' . 'SellerController@viewListOrder');
+
 Route::get('/detail/{id}', 'CustomerController@detail');

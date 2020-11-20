@@ -35,9 +35,10 @@
 </style>
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <div class="luar">
-    <div class="typography" style="margin-left: 45%">
-        <h1>Add Apartment</h1>
+    <div class="typography" style="margin-left: 45%" id="a">
+        <h1>Detail Apartment</h1>
     </div>
     <br>
     <form action="/addapartment" method="POST" enctype="multipart/form-data">
@@ -46,7 +47,7 @@
             <h4>Apartment Name : </h4>
         </div>
         <div class="mt-10">
-            <input type="text" name="nama" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
+            <input type="text" name="nama" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input" value="{{$apartment->apartment_nama}}">
         </div>
         <br>
         <div class="typography">
@@ -55,7 +56,14 @@
         <div class="default-select mt-10"  id="default-select" "="">
             <select style="display: none;" name="kategori">
                 @foreach ($allKategori as $item)
-                    <option value="{{$item->kategori_id}}">{{$item->kategori_nama}}</option>
+                    @if ($item->kategori_id == $apartment->kategori_id)
+                        <option value="{{$item->kategori_id}}">{{$item->kategori_nama}}</option>
+                    @endif
+                @endforeach
+                @foreach ($allKategori as $item)
+                    @if ($item->kategori_id != $apartment->kategori_id)
+                        <option value="{{$item->kategori_id}}">{{$item->kategori_nama}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -66,7 +74,14 @@
         <div class="default-select mt-10"  id="default-select" "="">
             <select style="display: none;" id="tipe" name="tipe">
                 @foreach ($allTipeApartment as $item)
-                    <option value="{{$item->tipe_apartment_id}}">{{$item->tipe_apartment_nama}}</option>
+                    @if ($item->tipe_apartment_id == $apartment->tipe_apartment_id)
+                        <option value="{{$item->tipe_apartment_id}}">{{$item->tipe_apartment_nama}}</option>
+                    @endif
+                @endforeach
+                @foreach ($allTipeApartment as $item)
+                    @if ($item->tipe_apartment_id != $apartment->tipe_apartment_id)
+                        <option value="{{$item->tipe_apartment_id}}">{{$item->tipe_apartment_nama}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -79,7 +94,14 @@
             <div class="form-select" id="default-select" "="">
                 <select style="display: none;" id="negara" name="negara">
                     @foreach ($allNegara as $item)
-                        <option value="{{$item->negara_id}}">{{$item->negara_nama}}</option>
+                        @if ($item->negara_id == $apartment->negara_id)
+                            <option value="{{$item->negara_id}}">{{$item->negara_nama}}</option>
+                        @endif
+                    @endforeach
+                    @foreach ($allNegara as $item)
+                        @if ($item->negara_id != $apartment->negara_id)
+                            <option value="{{$item->negara_id}}">{{$item->negara_nama}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -93,7 +115,12 @@
             <div class="form-select" id="cbKota">
                 <select style="display: none;" id="kota" name="kota">
                     @foreach ($allKota as $item)
-                        @if ($item->negara_id == 1)
+                        @if ($item->kota_id == $apartment->kota_id)
+                            <option value="{{$item->kota_id}}">{{$item->kota_nama}}</option>
+                        @endif
+                    @endforeach
+                    @foreach ($allKota as $item)
+                        @if ($item->kota_id != $apartment->kota_id && $item->negara_id ==  $apartment->negara_id)
                             <option value="{{$item->kota_id}}">{{$item->kota_nama}}</option>
                         @endif
                     @endforeach
@@ -106,35 +133,36 @@
         </div>
         <div class="input-group-icon mt-10">
             <div class="icon"  style="margin-top: 11px;"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-            <input type="text" name="alamat" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required="" class="single-input">
+        <input type="text" name="alamat" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required="" class="single-input" value="{{$apartment->apartment_alamat}}">
         </div>
         <br>
         <div class="typography">
             <h4>Price</h4>
         </div>
         <div class="mt-10">
-            <input type="number" name="harga" min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input">
+            <input type="number" name="harga" min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input" value="{{$apartment->apartment_harga}}" >
         </div>
         <br>
         <div class="typography">
             <h4>Built Year</h4>
         </div>
         <div class="mt-10">
-            <input type="number" name="tahun_bangun" name="build" min="1800" max="2021" placeholder="Build Year" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Build Year'" required="" class="single-input">
+            <input type="number" name="tahun_bangun" name="build" min="1800" max="2021" placeholder="Build Year" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Build Year'" required="" class="single-input" value="{{$apartment->apartment_tahun_bangun}}">
         </div>
         <br>
         <div class="typography">
             <h4>Select Photo</h4>
         </div>
         <div class="mt-10">
-            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
+            {{-- <img src="{{$apartment->$apartment_foto}}" alt=""> --}}
+            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input" value="{{$apartment->apartment_foto}}">
         </div>
         <br>
         <div class="typography">
             <h4>Description</h4>
         </div>
         <div class="mt-10">
-            <textarea name="deskripsi" class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required=""></textarea>
+            <textarea name="deskripsi" class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required="" value="{{$apartment->apartment_deskripsi}}"></textarea>
         </div>
         <br>
         <input type="hidden" name="user_id" value="{{ $aktif_user->user_id }}">

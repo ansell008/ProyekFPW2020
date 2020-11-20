@@ -8,6 +8,7 @@ use App\Kota;
 use App\Negara;
 use App\Tipe_apartment;
 use App\User;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -74,6 +75,8 @@ class SellerController extends Controller
         } else {
             $foto = null;
         }
+
+
         $apartment = new Apartment();
         $apartment->user_id = $user_id;
         $apartment->tipe_apartment_id = $tipe;
@@ -93,12 +96,50 @@ class SellerController extends Controller
         return redirect("/homeseller");
     }
 
-    public function DetailApartment(Request $req)
+    public function viewDetailApartment(Request $req)
     {
+        $id = $req->session()->get("idApartment");
+        $apartment = Apartment::find($id);
+        $aktif_user = $req->session()->get("aktif_user");
+        $allKategori = Kategori::all();
+        $allTipeApartment = Tipe_apartment::all();
+        $allNegara = Negara::all();
+        $allKota = Kota::all();
+
+        return view("Seller.detailApartment", [
+            "aktif_user" => $aktif_user,
+            "apartment" => $apartment,
+            "allKategori" => $allKategori,
+            "allTipeApartment" => $allTipeApartment,
+            "allNegara" => $allNegara,
+            "allKota" => $allKota
+        ]);
     }
 
-    public function DeleteApartment(Request $req)
+    public function DetailApartment(Request $req, $id)
     {
+        $req->session()->put("idApartment", $id);
+        return redirect("/viewdetailapartment");
+    }
+
+    public function DeleteApartment(Request $req, $id)
+    {
+        //status -1
+        Apartment::where('apartment_id', $id)
+            ->update([
+                "apartment_status" => -1
+            ]);
+
+        $apartment = Apartment::find($id);
+
+
+        if (file_exists(storage_path('app/public/' . $apartment->apartment_foto))) {
+            unlink(storage_path('app/public/' . $apartment->apartment_foto));
+        } else {
+            dd('File does not exists.');
+        }
+
+        return redirect("/homeseller");
     }
 
     public function viewListOrder(Request $req)

@@ -35,7 +35,6 @@
 @section('content')
 
 <div class="luar">
-
     <div class="typography" style="margin-left: 45%">
         <h1>List Apartment</h1>
         {{-- {{$aktif_user->user_nama}} --}}
@@ -55,22 +54,25 @@
         <tbody>
             @foreach ($allApartment as $item)
                 @if ($item->user_id == $aktif_user->user_id)
-                    <td>{{$item->user_id}}</td>
-                    <td>{{$item->apartment_nama}}</td>
-                    <td>Rp @currency($item->apartment_harga)</td>
-                    <td>{{$item->created_at}}</td>
-                    @if ($item->apartment_status == 0)
-                        <td><span class="badge badge-success">Available</span></td>
-                    @else
-                        <td><span class="badge badge-danger">Not Available</span></td>
+                    @if ($item->apartment_status != -1)
+                    <tr>
+                        <td>{{$item->apartment_id}}</td>
+                        <td>{{$item->apartment_nama}}</td>
+                        <td>Rp @currency($item->apartment_harga)</td>
+                        <td>{{$item->created_at}}</td>
+                        @if ($item->apartment_status == 0)
+                            <td><span class="badge badge-success">Available</span></td>
+                        @else
+                            <td><span class="badge badge-danger">Not Available</span></td>
+                        @endif
+                        <td>
+                            <a type="button" class="genric-btn success radius" href="/detailapartment/{{$item->apartment_id}}">Detail</a>
+                            <a type="button" class="genric-btn danger radius" href="/deleteapartment/{{$item->apartment_id}}">Delete</a>
+                        </td>
+                    </tr>
                     @endif
-                    <td>
-                        <a type="button" class="genric-btn success radius" href="detailapartment/{{$item->apartment_id}}">Detail</a>
-                        <a type="button" class="genric-btn danger radius" href="deleteapartment/{{$item->apartment_id}}">Delete</a>
-                    </td>
                 @endif
             @endforeach
-
         </tbody>
       </table>
 </div>
