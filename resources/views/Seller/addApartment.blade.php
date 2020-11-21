@@ -33,6 +33,21 @@
 }
 
 </style>
+
+@php
+    $ctr = 0;
+@endphp
+@foreach ($allKota as $item)
+@if ($item->negara_id == 1)
+    @php
+        if($ctr == 0){
+            $current = $item->kota_nama;
+        }
+        $ctr++;
+    @endphp
+@endif
+@endforeach
+
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <div class="luar">
@@ -90,14 +105,24 @@
         </div>
         <div class="input-group-icon mt-10">
             <div class="icon" style="margin-top: 11px;"><i class="fa fa-plane" aria-hidden="true"></i></div>
-            <div class="form-select" id="cbKota">
-                <select style="display: none;" id="kota" name="kota">
+            <div class="form-select" id="kota">
+                <select style="display: none;" name="kota">
                     @foreach ($allKota as $item)
                         @if ($item->negara_id == 1)
                             <option value="{{$item->kota_id}}">{{$item->kota_nama}}</option>
                         @endif
                     @endforeach
                 </select>
+                <div class="nice-select" tabindex="0">
+                    <span class="current">{{$current}}</span>
+                    <ul class="list">
+                        @foreach ($allKota as $item)
+                            @if ($item->negara_id == 1)
+                                <li data-value="{{$item->kota_id}}" class="option">{{$item->kota_nama}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
         <br>
@@ -113,7 +138,7 @@
             <h4>Price</h4>
         </div>
         <div class="mt-10">
-            <input type="number" name="harga" min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input">
+            <input type="text" id="price" name="harga" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input" >
         </div>
         <br>
         <div class="typography">
@@ -138,6 +163,9 @@
         </div>
         <br>
         <input type="hidden" name="user_id" value="{{ $aktif_user->user_id }}">
+        <select name="" id="coba">
+
+        </select>
         <button class="genric-btn info radius" type="submit">Add</button>
     </form>
 
@@ -151,12 +179,11 @@
 @section('script')
 <script>
         $(document).ready(function () {
-            // $( "#build" ).datepicker({dateFormat: 'yy'});
+            // $('#price').autoNumeric('init');
         });
         $("#negara").change(function () {
             var negara = $("#negara").val();
             let _token   = $('meta[name="csrf-token"]').attr('content');
-            // alert(_token)
             $.ajax({
           		type: 'POST',
               	url: "/getkota",
@@ -166,7 +193,8 @@
                       },
               	cache: false,
               	success: function(msg){
-                    $("#tipe").html(msg);
+                    // alert(msg);
+                    $("#kota").html(msg);
                 }
             });
         });

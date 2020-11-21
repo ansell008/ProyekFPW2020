@@ -140,7 +140,7 @@
             <h4>Price</h4>
         </div>
         <div class="mt-10">
-            <input type="number" name="harga" min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input" value="{{$apartment->apartment_harga}}" >
+            <input type="text" id="price" name="harga" data-a-sign="Rp. " min="1" placeholder="Price" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'" required="" class="single-input" value="{{$apartment->apartment_harga}}" >
         </div>
         <br>
         <div class="typography">
@@ -154,19 +154,21 @@
             <h4>Select Photo</h4>
         </div>
         <div class="mt-10">
-            {{-- <img src="{{$apartment->$apartment_foto}}" alt=""> --}}
-            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input" value="{{$apartment->apartment_foto}}">
+        <img src="storage/{{$apartment->apartment_foto}}" width="150px" height="150px" alt=""><br><br>
+            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
         </div>
         <br>
         <div class="typography">
             <h4>Description</h4>
         </div>
         <div class="mt-10">
-            <textarea name="deskripsi" class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required="" value="{{$apartment->apartment_deskripsi}}"></textarea>
+            <textarea id="deskripsi" name="deskripsi" class="single-textarea" placeholder="Description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" required="" value=""></textarea>
         </div>
         <br>
+
+        <input type="hidden" id="tempdesc" value="{{ $apartment->apartment_deskripsi }}">
         <input type="hidden" name="user_id" value="{{ $aktif_user->user_id }}">
-        <button class="genric-btn info radius" type="submit">Add</button>
+        <button class="genric-btn info radius" type="submit">Update</button>
     </form>
 
 </div>
@@ -177,9 +179,13 @@
 @endsection
 
 @section('script')
+
 <script>
+
         $(document).ready(function () {
-            // $( "#build" ).datepicker({dateFormat: 'yy'});
+            var desc = $("#tempdesc").val();
+            $("#deskripsi").val(desc);
+            // $('#price').autoNumeric('init');
         });
         $("#negara").change(function () {
             var negara = $("#negara").val();
@@ -198,6 +204,9 @@
                 }
             });
         });
+
+
+
 </script>
 @endsection
 

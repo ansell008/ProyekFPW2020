@@ -76,7 +76,6 @@ class SellerController extends Controller
             $foto = null;
         }
 
-
         $apartment = new Apartment();
         $apartment->user_id = $user_id;
         $apartment->tipe_apartment_id = $tipe;
@@ -120,6 +119,36 @@ class SellerController extends Controller
     {
         $req->session()->put("idApartment", $id);
         return redirect("/viewdetailapartment");
+    }
+
+    public function updateApartment(Request $req)
+    {
+        $id = $req->session()->get("idApartment");
+
+        $tipe = $req->tipe;
+        $kategori = $req->kategori;
+        $negara = $req->negara;
+        $kota = $req->kota;
+        $nama = $req->nama;
+        $harga = $req->harga;
+        $alamat = $req->alamat;
+        $deskripsi = $req->deskripsi;
+        $tahun_bangun = $req->tahun_bangun;
+
+        $apartment = Apartment::find($id);
+        $apartment->tipe_apartment_id = $tipe;
+        $apartment->kategori_id  = $kategori;
+        $apartment->negara_id  = $negara;
+        $apartment->kota_id  = $kota;
+        $apartment->apartment_nama = $nama;
+        $apartment->apartment_harga = $harga;
+        $apartment->apartment_alamat = $alamat;
+        $apartment->apartment_deskripsi = $deskripsi;
+
+        // $apartment->apartment_foto = $foto;
+
+        $apartment->apartment_tahun_bangun = $tahun_bangun;
+        $apartment->save();
     }
 
     public function DeleteApartment(Request $req, $id)
