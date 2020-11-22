@@ -41,7 +41,7 @@
         <h1>Detail Apartment</h1>
     </div>
     <br>
-    <form action="/addapartment" method="POST" enctype="multipart/form-data">
+    <form action="/updateapartment" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="typography">
             <h4>Apartment Name : </h4>
@@ -155,7 +155,7 @@
         </div>
         <div class="mt-10">
         <img src="storage/{{$apartment->apartment_foto}}" width="150px" height="150px" alt=""><br><br>
-            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'" required="" class="single-input">
+            <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'"  class="single-input">
         </div>
         <br>
         <div class="typography">

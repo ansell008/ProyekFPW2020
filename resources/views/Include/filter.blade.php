@@ -67,8 +67,6 @@
                                 <div style="float: none"></div>
                              <button type="button" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
 
-
-
                                 @endif
 
                             </nav>

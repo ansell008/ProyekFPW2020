@@ -32,12 +32,16 @@
     float: right;
 }
 </style>
+
+@php
+    $ctr = 1;
+@endphp
+
 @section('content')
 
 <div class="luar">
     <div class="typography" style="margin-left: 45%">
         <h1>List Apartment</h1>
-        {{-- {{$aktif_user->user_nama}} --}}
     </div>
     <br>
     <table class="table" id="listApart">
@@ -56,7 +60,7 @@
                 @if ($item->user_id == $aktif_user->user_id)
                     @if ($item->apartment_status != -1)
                     <tr>
-                        <td>{{$item->apartment_id}}</td>
+                        <td>{{$ctr}}</td>
                         <td>{{$item->apartment_nama}}</td>
                         <td>Rp @currency($item->apartment_harga)</td>
                         <td>{{$item->created_at}}</td>
@@ -70,6 +74,9 @@
                             <a type="button" class="genric-btn danger radius" href="/deleteapartment/{{$item->apartment_id}}">Delete</a>
                         </td>
                     </tr>
+                        @php
+                            $ctr++;
+                        @endphp
                     @endif
                 @endif
             @endforeach

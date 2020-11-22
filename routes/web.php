@@ -35,14 +35,12 @@ Route::any('/homeseller', 'SellerController@index');
 Route::get('/viewaddapartment', 'SellerController@viewAddApartment');
 Route::post('/getkota', 'SellerController@GetKota');
 Route::post('/addapartment', 'SellerController@AddApartment');
-
 Route::get('/detailapartment/{id}', 'SellerController@DetailApartment');
 Route::get('/viewdetailapartment', 'SellerController@viewDetailApartment');
-
+Route::post('/updateapartment', 'SellerController@UpdateApartment');
 Route::get('/deleteapartment/{id}', 'SellerController@DeleteApartment');
-
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
 
-Route::get('/viewlistorder' . 'SellerController@viewListOrder');
+Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
 Route::get('/detail/{id}', 'CustomerController@detail');

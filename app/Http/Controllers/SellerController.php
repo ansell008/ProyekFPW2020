@@ -121,7 +121,7 @@ class SellerController extends Controller
         return redirect("/viewdetailapartment");
     }
 
-    public function updateApartment(Request $req)
+    public function UpdateApartment(Request $req)
     {
         $id = $req->session()->get("idApartment");
 
@@ -144,11 +144,15 @@ class SellerController extends Controller
         $apartment->apartment_harga = $harga;
         $apartment->apartment_alamat = $alamat;
         $apartment->apartment_deskripsi = $deskripsi;
-
-        // $apartment->apartment_foto = $foto;
-
+        if ($req->hasFile('foto')) {
+            $foto =  $req->foto->store('apart_photo', 'public');
+            $apartment->apartment_foto = $foto;
+        } else {
+            $foto = null;
+        }
         $apartment->apartment_tahun_bangun = $tahun_bangun;
         $apartment->save();
+        return redirect("/homeseller");
     }
 
     public function DeleteApartment(Request $req, $id)
