@@ -31,6 +31,10 @@
 }
 </style>
 @section('content')
+@if (session()->has("update"))
+<div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("update")}}</b></div>
+     <br>
+@endif
 <div class="luar">
     @isset($posting)
         @foreach ($posting as $p)

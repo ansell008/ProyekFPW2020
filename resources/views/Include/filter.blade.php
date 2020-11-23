@@ -22,11 +22,11 @@
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
                             <a href="/">
-                                <img src="hus/img/logo.png" alt="">
+                                <img src="logo.png" alt="" style="width: 100px">
                             </a>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6">
+                    <div class="col-xl-5 col-lg-5">
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 @if ($aktif_user->user_tipe == 0)
@@ -51,9 +51,9 @@
 
                                         @endisset
                                     </select>
-                                  </div>
+                                </div>
 
-                                  <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
+                                <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
 
                                     <select class="form-control" id="exampleFormControlSelect1">
                                         @isset($kota)
@@ -67,15 +67,17 @@
                                 <div style="float: none"></div>
                              <button type="button" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
 
-                                @endif
+                            @endif
 
                             </nav>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                    <div class="col-xl-5 col-lg-5 d-none d-lg-block">
                         <div class="social_wrap d-flex align-items-center justify-content-end">
                             <div class="login_text">
+                            <img style="border-radius:50%" src="storage/{{$aktif_user->user_photo}}" width="50px" alt=""> &nbsp;&nbsp;
                             <a href="" style="color: white">Hello, {{$aktif_user->user_nama}}</a>
+                            <a href="/editProfilePage">Edit Profil</a>
                             <a href="/LoginPage">Logout</a>
                             </div>
 

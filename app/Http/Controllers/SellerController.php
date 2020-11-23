@@ -23,6 +23,42 @@ class SellerController extends Controller
         return view("Seller.home", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allUser" => $allUser]);
     }
 
+    public function goToEditProfile(Request $req){
+        $aktif_user = $req->session()->get("aktif_user");
+        return view('Seller.editProfile', ["aktif_user" => $aktif_user]);
+    }
+    public function editProfile(Request $req){
+        $id = $req->session()->get("aktif_user")->user_id;
+        $pass = $req->password;
+        $email = $req->email;
+        $nama = $req->nama;
+        $phone = $req->phone;
+
+        $updateP = User::find($id);
+        $updateP->user_email = $email;
+        if($pass!=""){
+            $updateP->user_password  = sha1($pass);
+        }
+        $updateP->user_nama = $nama;
+        $updateP->user_notelp  = $phone;
+        if ($req->hasFile('foto')) {
+            $foto =  $req->foto->store('profile-pict', 'public');
+            $updateP->user_photo = $foto;
+        } else {
+            $foto = null;
+        }
+        $updateP->save();
+        $req->session()->put('aktif_user',$updateP);
+
+        if($updateP->user_tipe==0){
+            return redirect("/homeseller")->with('update','Berhasil Update Profil');
+        }else{
+            return redirect("/homecustomer")->with('update','Berhasil Update Profil');
+        }
+
+
+    }
+
     public function viewAddApartment(Request $req)
     {
 
@@ -52,6 +88,8 @@ class SellerController extends Controller
             "allKota" => $allKota
         ]);
     }
+
+
 
     public function AddApartment(Request $req)
     {

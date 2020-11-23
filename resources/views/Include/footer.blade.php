@@ -12,7 +12,7 @@
                         <p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
                         <div class="footer_logo">
                             <a href="#">
-                                <img src="hus/img/footer_logo.png" alt="">
+                                <img style="width: 100px" src="logo.png" alt="">
                             </a>
                         </div>
                     </div>
