@@ -1,5 +1,7 @@
 
-
+@extends('Include.layout')
+@extends('Include.header')
+@extends('Include.footer')
 
 @section('content')
 <button><a href="/homecustomer">Back</a></button>
