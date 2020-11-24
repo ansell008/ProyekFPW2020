@@ -76,20 +76,38 @@
 
                                     </form>
 
+                                <form action="/search" method="POST">
+                                 @csrf
+                                 @isset($nn)
+                                <input type="hidden" name="country" value="{{$nn}}">
+                                 @endisset
+                                 <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
 
-                                <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
-
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" id="exampleFormControlSelect1" name="city">
                                         @isset($kota)
+                                        @if (isset($kk))
+                                        @foreach ($kota as $k)
+                                        @if ($k->kota_id==$kk)
+                                        <option value="{{$k->kota_id}}" selected="selected">{{$k->kota_nama}}</option>
+                                        @else
+                                        <option value="{{$k->kota_id}}">{{$k->kota_nama}}</option>
+                                        @endif
+
+                                        @endforeach
+                                        @else
                                         @foreach ($kota as $k)
                                         <option value="{{$k->kota_id}}">{{$k->kota_nama}}</option>
                                         @endforeach
+                                        @endif
+
 
                                         @endisset
                                     </select>
                                   </div>
                                 <div style="float: none"></div>
-                             <button type="button" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
+                                <button type="submit" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
+                                </form>
+
 
                             @endif
 

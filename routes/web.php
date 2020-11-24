@@ -49,3 +49,4 @@ Route::get('/detail/{id}', 'CustomerController@detail');
 Route::get('/detail', 'CustomerController@showdetail');
 Route::any('/ubahkota', "CustomerController@ubahkota");
 Route::any('/beli', "CustomerController@beli");
+Route::any('/search', "CustomerController@search");
