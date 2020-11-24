@@ -46,3 +46,6 @@ Route::post('/editProfile', 'SellerController@editProfile');
 Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
 Route::get('/detail/{id}', 'CustomerController@detail');
+Route::get('/detail', 'CustomerController@showdetail');
+Route::any('/ubahkota', "CustomerController@ubahkota");
+Route::any('/beli', "CustomerController@beli");

@@ -35,11 +35,15 @@
 <div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("update")}}</b></div>
      <br>
 @endif
+@if (session()->has("beli"))
+<div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("beli")}}</b></div>
+     <br>
+@endif
 <div class="luar">
     @isset($posting)
         @foreach ($posting as $p)
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
+        <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
             <div class="card-body">
             <h5 class="card-title">{{$p->apartment_nama}}</h5>
               <p class="card-text">{{$p->user_nama}}</p>

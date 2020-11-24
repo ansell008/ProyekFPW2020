@@ -41,24 +41,48 @@
                                             display: block;
                                         }
                                     </style>
-                                <div class="form-group" style="width: 100px;display:inline">
+                                    <form action="/ubahkota" method="POST">
+                                        @csrf
+                                        @if (isset($nn))
+                                        <div class="form-group" style="width: 100px;display:inline">
 
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        @isset($negara)
-                                        @foreach ($negara as $n)
-                                        <option value="{{$n->negara_nama}}">{{$n->negara_nama}}</option>
-                                        @endforeach
+                                            <select class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()" name="negaranya">
+                                                @isset($negara)
+                                                @foreach ($negara as $n)
+                                                @if ($nn==$n->negara_id)
+                                                <option value="{{$n->negara_id}}" selected="selected">{{$n->negara_nama}}</option>
+                                                @else
+                                                <option value="{{$n->negara_id}}">{{$n->negara_nama}}</option>
+                                                @endif
 
-                                        @endisset
-                                    </select>
-                                </div>
+                                                @endforeach
+
+                                                @endisset
+                                            </select>
+                                        </div>
+                                        @else
+                                        <div class="form-group" style="width: 100px;display:inline">
+
+                                            <select class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()" name="negaranya">
+                                                @isset($negara)
+                                                @foreach ($negara as $n)
+                                                <option value="{{$n->negara_id}}">{{$n->negara_nama}}</option>
+                                                @endforeach
+
+                                                @endisset
+                                            </select>
+                                        </div>
+                                        @endif
+
+                                    </form>
+
 
                                 <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
 
                                     <select class="form-control" id="exampleFormControlSelect1">
                                         @isset($kota)
                                         @foreach ($kota as $k)
-                                        <option value="{{$k->kota_nama}}">{{$k->kota_nama}}</option>
+                                        <option value="{{$k->kota_id}}">{{$k->kota_nama}}</option>
                                         @endforeach
 
                                         @endisset
