@@ -163,9 +163,6 @@
         </div>
         <br>
         <input type="hidden" name="user_id" value="{{ $aktif_user->user_id }}">
-        <select name="" id="coba">
-
-        </select>
         <button class="genric-btn info radius" type="submit">Add</button>
     </form>
 

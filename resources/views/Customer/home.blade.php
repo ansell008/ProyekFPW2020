@@ -3,7 +3,6 @@
 @extends('Include.footer')
 
 
-
 <style>
   .luar{
       width: 100%;
@@ -34,17 +33,18 @@
 <div class="luar">
     @isset($posting)
         @foreach ($posting as $p)
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="/hus/img/banana.jpg" alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title">{{$p->apartment_nama}}</h5>
-              <p class="card-text">{{$p->user_nama}}</p>
-                <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
-            </div>
-          </div>
+            @if ($p->apartment_status == 0)
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{$p->apartment_nama}}</h5>
+                    <p class="card-text">{{$p->user_nama}}</p>
+                        <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
+                    </div>
+                </div>
+            @endif
         @endforeach
     @endisset
-
 </div>
 
 

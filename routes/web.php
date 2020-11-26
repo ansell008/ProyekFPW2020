@@ -25,9 +25,6 @@ Route::any('/homecustomer', 'CustomerController@index');
 
 // apartmentstatus
 // 0 = tersedia
-// 1 = menunggu admin
-// 2 = diterima
-// -2 ditolak
 // -1 = dihapus
 
 //SELLER
