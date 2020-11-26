@@ -37,7 +37,13 @@ Route::get('/viewdetailapartment', 'SellerController@viewDetailApartment');
 Route::post('/updateapartment', 'SellerController@UpdateApartment');
 Route::get('/deleteapartment/{id}', 'SellerController@DeleteApartment');
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
+Route::get('/editProfilePage', 'SellerController@goToEditProfile');
+Route::post('/editProfile', 'SellerController@editProfile');
 
 Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
 Route::get('/detail/{id}', 'CustomerController@detail');
+Route::get('/detail', 'CustomerController@showdetail');
+Route::any('/ubahkota', "CustomerController@ubahkota");
+Route::any('/beli', "CustomerController@beli");
+Route::any('/search', "CustomerController@search");

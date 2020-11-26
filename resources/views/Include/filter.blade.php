@@ -22,11 +22,11 @@
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
                             <a href="/">
-                                <img src="hus/img/logo.png" alt="">
+                                <img src="logo.png" alt="" style="width: 100px">
                             </a>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6">
+                    <div class="col-xl-5 col-lg-5">
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 @if ($aktif_user->user_tipe == 0)
@@ -41,41 +41,85 @@
                                             display: block;
                                         }
                                     </style>
-                                <div class="form-group" style="width: 100px;display:inline">
+                                    <form action="/ubahkota" method="POST">
+                                        @csrf
+                                        @if (isset($nn))
+                                        <div class="form-group" style="width: 100px;display:inline">
 
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        @isset($negara)
-                                        @foreach ($negara as $n)
-                                        <option value="{{$n->negara_nama}}">{{$n->negara_nama}}</option>
-                                        @endforeach
+                                            <select class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()" name="negaranya">
+                                                @isset($negara)
+                                                @foreach ($negara as $n)
+                                                @if ($nn==$n->negara_id)
+                                                <option value="{{$n->negara_id}}" selected="selected">{{$n->negara_nama}}</option>
+                                                @else
+                                                <option value="{{$n->negara_id}}">{{$n->negara_nama}}</option>
+                                                @endif
 
-                                        @endisset
-                                    </select>
-                                  </div>
+                                                @endforeach
 
-                                  <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
+                                                @endisset
+                                            </select>
+                                        </div>
+                                        @else
+                                        <div class="form-group" style="width: 100px;display:inline">
 
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                            <select class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()" name="negaranya">
+                                                @isset($negara)
+                                                @foreach ($negara as $n)
+                                                <option value="{{$n->negara_id}}">{{$n->negara_nama}}</option>
+                                                @endforeach
+
+                                                @endisset
+                                            </select>
+                                        </div>
+                                        @endif
+
+                                    </form>
+
+                                <form action="/search" method="POST">
+                                 @csrf
+                                 @isset($nn)
+                                <input type="hidden" name="country" value="{{$nn}}">
+                                 @endisset
+                                 <div class="form-group" style="width: 100px;display:inline;float: left;margin-left:10%">
+
+                                    <select class="form-control" id="exampleFormControlSelect1" name="city">
                                         @isset($kota)
+                                        @if (isset($kk))
                                         @foreach ($kota as $k)
-                                        <option value="{{$k->kota_nama}}">{{$k->kota_nama}}</option>
+                                        @if ($k->kota_id==$kk)
+                                        <option value="{{$k->kota_id}}" selected="selected">{{$k->kota_nama}}</option>
+                                        @else
+                                        <option value="{{$k->kota_id}}">{{$k->kota_nama}}</option>
+                                        @endif
+
                                         @endforeach
+                                        @else
+                                        @foreach ($kota as $k)
+                                        <option value="{{$k->kota_id}}">{{$k->kota_nama}}</option>
+                                        @endforeach
+                                        @endif
+
 
                                         @endisset
                                     </select>
                                   </div>
                                 <div style="float: none"></div>
-                             <button type="button" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
+                                <button type="submit" class="btn btn-secondary" style="margin-left: 8%;margin-top:0.8%" >Search</button>
+                                </form>
 
-                                @endif
+
+                            @endif
 
                             </nav>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                    <div class="col-xl-5 col-lg-5 d-none d-lg-block">
                         <div class="social_wrap d-flex align-items-center justify-content-end">
                             <div class="login_text">
+                            <img style="border-radius:50%" src="storage/{{$aktif_user->user_photo}}" width="50px" alt=""> &nbsp;&nbsp;
                             <a href="" style="color: white">Hello, {{$aktif_user->user_nama}}</a>
+                            <a href="/editProfilePage">Edit Profil</a>
                             <a href="/LoginPage">Logout</a>
                             </div>
 
