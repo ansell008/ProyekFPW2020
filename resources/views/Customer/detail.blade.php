@@ -8,11 +8,7 @@
 <form action="/beli" method="POST">
 @csrf
 <h1>{{$dipilih->apartment_nama}}</h1>
-<<<<<<< HEAD
-<img src="/storage/{{$dipilih->apartment_foto}}" alt="" style="width: 500px;height:400px">
-=======
 <img src="storage/{{$dipilih->apartment_foto}}" alt="" style="width: 500px;height:400px">
->>>>>>> ad96d9322d4d4b76c8dd9bde48a78dda4b4fc042
 <h3>{{$dipilih->user_nama}}</h3>
 <h5>{{$dipilih->apartment_harga}}</h5>
 <div class="form-group" style="width: 100px;display:inline">

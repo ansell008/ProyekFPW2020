@@ -41,7 +41,6 @@
 <div class="luar">
     @isset($posting)
         @foreach ($posting as $p)
-<<<<<<< HEAD
             @if ($p->apartment_status == 0)
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
@@ -52,16 +51,6 @@
                     </div>
                 </div>
             @endif
-=======
-        <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title">{{$p->apartment_nama}}</h5>
-              <p class="card-text">{{$p->user_nama}}</p>
-                <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
-            </div>
-          </div>
->>>>>>> ad96d9322d4d4b76c8dd9bde48a78dda4b4fc042
         @endforeach
     @endisset
 </div>
