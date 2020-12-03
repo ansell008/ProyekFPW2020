@@ -26,6 +26,12 @@
 <input type="hidden" name="harga" value="{{$dipilih->apartment_harga}}">
 <button type="submit" class="btn btn-success">BUY/RENT</button>
 </form>
+<form action="/favorit" method="post">
+    @csrf
+    <input type="hidden" name="idap" value="{{$dipilih->apartment_id}}">
+    <input type="hidden" name="idus" value="{{$aktif_user->user_id}}">
+    <button type="submit" class="btn btn-danger">Add to favorites</button>
+</form>
 
 
 @endsection

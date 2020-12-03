@@ -39,6 +39,7 @@ Route::get('/deleteapartment/{id}', 'SellerController@DeleteApartment');
 Route::get('/deleteapartment', 'SellerController@DeleteApartment');
 Route::get('/editProfilePage', 'SellerController@goToEditProfile');
 Route::post('/editProfile', 'SellerController@editProfile');
+Route::get('/terimatransaksi/{id}', 'SellerController@terimaTransaksi');
 
 Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
@@ -47,3 +48,4 @@ Route::get('/detail', 'CustomerController@showdetail');
 Route::any('/ubahkota', "CustomerController@ubahkota");
 Route::any('/beli', "CustomerController@beli");
 Route::any('/search', "CustomerController@search");
+Route::post('/favorit', "CustomerController@favorit");

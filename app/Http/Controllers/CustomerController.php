@@ -61,6 +61,19 @@ class CustomerController extends Controller
         return view("Customer.detail",['dipilih' => $posting, 'aktif_user' => $aktif_user]);
     }
 
+    public function favorit(Request $req)
+    {
+        $mytime = date('Y-m-d H:i:s');
+        $tgl=date('Y-m-d');
+        DB::table('favorit')->insert([
+            'user_id'=>$req->idus,
+            'apartment_id'=>$req->idap,
+            'created_at'=>$mytime
+        ]);
+        $req->session()->put('beli',"berhasil menambah favorit!");
+        return redirect("/homecustomer");
+    }
+
     public function beli(Request $req)
     {
         $mytime = date('Y-m-d H:i:s');

@@ -7,6 +7,7 @@ use App\Kategori;
 use App\Kota;
 use App\Negara;
 use App\Tipe_apartment;
+use App\Transaksi;
 use App\User;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
@@ -216,6 +217,22 @@ class SellerController extends Controller
     public function viewListOrder(Request $req)
     {
         $aktif_user = $req->session()->get("aktif_user");
-        return view("Seller.listOrder", ["aktif_user" => $aktif_user]);
+        $allApartment = Apartment::all();
+        $allTransaksi=Transaksi::all();
+        return view("Seller.listOrder", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allTransaksi" => $allTransaksi]);
+    }
+
+    public function terimaTransaksi(Request $req, $id)
+    {
+        Transaksi::where('transaksi_id', $id)
+            ->update([
+                "transaksi_status" => 0
+            ]);
+        $transaksi = Transaksi::find($id);
+        Apartment::where('apartment_id', $transaksi->apartment_id)
+        ->update([
+            "apartment_status" => 1
+        ]);
+        return redirect("/homeseller");
     }
 }
