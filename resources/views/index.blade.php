@@ -14,7 +14,7 @@
                             <h3>Our homes are ready,
                                 whenever you are</h3>
                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adipilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis.</p> --}}
-                                <div class="single-element-widget mt-30">
+                                {{-- <div class="single-element-widget mt-30">
                                     <label style="color:white" for="">Where</label>
                                     <div class="default-select" id="default-select">
                                         <select style="display: none;">
@@ -26,7 +26,7 @@
                                         <button class="genric-btn danger">Search</button>
                                         {{-- <div class="nice-select" tabindex="0"><span class="current">English</span><ul class="list"><li data-value=" 1" class="option selected focus">English</li><li data-value="1" class="option">Spanish</li><li data-value="1" class="option">Arabic</li><li data-value="1" class="option">Portuguise</li><li data-value="1" class="option">Bengali</li></ul></div> --}}
                                     </div>
-                                </div>
+                                </div> --}}
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
             <div class="col-lg-6">
                 <div class="about_info pl-70">
                     <div class="section_title mb-55">
-                        <h3>We are Hus <br>
+                        <h3>We are APART.IN <br>
                             <span>Realestate Company</span></h3>
                         <div class="devider">
                             <span></span>
