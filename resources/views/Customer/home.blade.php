@@ -39,7 +39,7 @@
      <br>
 @endif
 <div class="luar">
-
+    <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
     <div class="satu" style="height: 500px; ">
         <h1 class="display-4">Recommended</h1>
         @isset($rekom)
@@ -52,7 +52,7 @@
                 <p class="card-text">{{$p->user_nama}}
                 </p>
                     <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
-                    <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
+
             </div>
         </div>
             @endif
@@ -71,7 +71,7 @@
                         <h5 class="card-title">{{$p->apartment_nama}}</h5>
                         <p class="card-text">{{$p->user_nama}}</p>
                             <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
-                            <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
+
                         </div>
                     </div>
                 @endif
