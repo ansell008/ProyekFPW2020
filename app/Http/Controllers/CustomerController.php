@@ -49,9 +49,15 @@ class CustomerController extends Controller
     {
         $aktif_user = $req->session()->get("aktif_user");
         $posting = DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apartment_id=?', [$id]);
+        if($posting[0]->kategori_id==1){
+            $req->session()->put('posting',$posting[0]);
+            return redirect("/detail");
+        }else{
+            $req->session()->put('posting',$posting[0]);
+            return redirect("/detailsewa");
+        }
         //return view("Customer.detail", ['dipilih' => $posting[0], 'aktif_user' => $aktif_user]);
-        $req->session()->put('posting',$posting[0]);
-        return redirect("/detail");
+
 
     }
     public function showdetail(Request $req)
@@ -60,7 +66,12 @@ class CustomerController extends Controller
         $posting=$req->session()->get('posting');
         return view("Customer.detail",['dipilih' => $posting, 'aktif_user' => $aktif_user]);
     }
-
+    public function showdetailsewa(Request $req)
+    {
+        $aktif_user = $req->session()->get("aktif_user");
+        $posting=$req->session()->get('posting');
+        return view("Customer.detailsewa",['dipilih' => $posting, 'aktif_user' => $aktif_user]);
+    }
     public function favorit(Request $req)
     {
         $mytime = date('Y-m-d H:i:s');
@@ -78,11 +89,31 @@ class CustomerController extends Controller
     {
         $mytime = date('Y-m-d H:i:s');
         $tgl=date('Y-m-d');
+        DB::update('update apartment set apartment_status = 0 where apartment_id = ?', [$req->idap]);
         DB::table('transaksi')->insert([
             'apartment_id'=>$req->idap,
             'user_id'=>$req->idus,
-            'transaksi_status'=>$req->tipe,
-            'transaksi_tanggal_selesai'=>$mytime,
+            'transaksi_status'=>0,
+            'transaksi_tanggal_selesai'=>null,
+            'transaksi_total_harga'=>$req->harga,
+            'transaksi_tanggal_beli'=>$mytime,
+            'created_at'=>$tgl
+        ]);
+        $req->session()->put('beli',"berhasil melakukan transaksi!");
+        return redirect("/homecustomer");
+    }
+
+    public function sewa(Request $req)
+    {
+        $mytime = date('Y-m-d H:i:s');
+        $tgl=date('Y-m-d');
+        $selesai=$req->selesai;
+        DB::update('update apartment set apartment_status = 0 where apartment_id = ?', [$req->idap]);
+        DB::table('transaksi')->insert([
+            'apartment_id'=>$req->idap,
+            'user_id'=>$req->idus,
+            'transaksi_status'=>0,
+            'transaksi_tanggal_selesai'=>$selesai,
             'transaksi_total_harga'=>$req->harga,
             'transaksi_tanggal_beli'=>$mytime,
             'created_at'=>$tgl

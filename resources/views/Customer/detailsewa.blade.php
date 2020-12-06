@@ -5,7 +5,7 @@
 
 @section('content')
 <button  class="btn btn-secondary"><a href="/homecustomer">BACK</a></button>
-<form action="/beli" method="POST">
+<form action="/sewa" method="POST">
 @csrf
 <h1>{{$dipilih->apartment_nama}}</h1>
 <img src="storage/{{$dipilih->apartment_foto}}" alt="" style="width: 500px;height:400px">
@@ -13,11 +13,12 @@
 <h5>{{$dipilih->apartment_harga}}</h5>
 <div class="form-group" style="width: 100px;display:inline">
 
+    <input type="date" name="selesai">
 </div>
 <input type="hidden" name="idap" value="{{$dipilih->apartment_id}}">
 <input type="hidden" name="idus" value="{{$aktif_user->user_id}}">
 <input type="hidden" name="harga" value="{{$dipilih->apartment_harga}}">
-<button type="submit" class="btn btn-success">BUY</button>
+<button type="submit" class="btn btn-success">RENT</button>
 </form>
 <form action="/favorit" method="post">
     @csrf

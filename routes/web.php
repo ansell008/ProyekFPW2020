@@ -45,7 +45,9 @@ Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
 Route::get('/detail/{id}', 'CustomerController@detail');
 Route::get('/detail', 'CustomerController@showdetail');
+Route::get('/detailsewa','CustomerController@showdetailsewa');
 Route::any('/ubahkota', "CustomerController@ubahkota");
 Route::any('/beli', "CustomerController@beli");
+Route::any('/sewa', "CustomerController@sewa");
 Route::any('/search', "CustomerController@search");
 Route::post('/favorit', "CustomerController@favorit");
