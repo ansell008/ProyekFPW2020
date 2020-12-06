@@ -56,7 +56,7 @@
     <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
     @isset($posting)
         @foreach ($posting as $p)
-            @if ($p->apartment_status == 0)
+            @if ($p->apartment_status == 1)
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
                     <div class="card-body">
