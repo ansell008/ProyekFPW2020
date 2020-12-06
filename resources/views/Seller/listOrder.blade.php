@@ -70,7 +70,7 @@
                     @endif
                     <td>
                         @if ($item->transaksi_status == 0)
-                            <a type="button" class="genric-btn success radius" href="/terimatransaksi/{{$item->transaksi_id}}" disabled="disabled">Accept</a>
+                            <a type="button" class="genric-btn success radius" href="#" disabled="disabled">Accept</a>
                         @else
                             <a type="button" class="genric-btn success radius" href="/terimatransaksi/{{$item->transaksi_id}}">Accept</a>
                         @endif

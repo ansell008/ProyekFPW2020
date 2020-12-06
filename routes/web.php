@@ -49,3 +49,5 @@ Route::any('/ubahkota', "CustomerController@ubahkota");
 Route::any('/beli', "CustomerController@beli");
 Route::any('/search', "CustomerController@search");
 Route::post('/favorit', "CustomerController@favorit");
+Route::get('/deleteFavorit/{id}', 'CustomerController@deleteFavorit');
+Route::get('/halamanFavorit', "CustomerController@toFavorit");

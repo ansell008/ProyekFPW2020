@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Favorit;
 
 class CustomerController extends Controller
 {
@@ -72,6 +73,22 @@ class CustomerController extends Controller
         ]);
         $req->session()->put('beli',"berhasil menambah favorit!");
         return redirect("/homecustomer");
+    }
+
+    public function deleteFavorit(Request $req, $id)
+    {
+        Favorit::where('favorit_id', $id)->delete();
+        return redirect("/halamanFavorit");
+    }
+
+    public function toFavorit(Request $req)
+    {
+        $aktif_user = $req->session()->get("aktif_user");
+        $negara = DB::table('negara')->get();
+
+        $posting = DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko,favorit f where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apartment_id=f.apartment_id');
+        //dd($posting);
+        return view("Customer.favorit", ["aktif_user" => $aktif_user, "negara" => $negara, "favorit" => $posting]);
     }
 
     public function beli(Request $req)

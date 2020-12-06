@@ -39,16 +39,17 @@
      <br>
 @endif
 <div class="luar">
-    <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
-    @isset($posting)
-        @foreach ($posting as $p)
-            @if ($p->apartment_status == 0)
+    <a href="/homecustomer" class="btn btn-secondary">Back</a> <br>
+    @isset($favorit)
+        @foreach ($favorit as $f)
+            @if ($f->apartment_status == 0)
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
+                    <img class="card-img-top" src="storage/{{$f->apartment_foto}}" alt="Card image cap">
                     <div class="card-body">
-                    <h5 class="card-title">{{$p->apartment_nama}}</h5>
-                    <p class="card-text">{{$p->user_nama}}</p>
-                        <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
+                    <h5 class="card-title">{{$f->apartment_nama}}</h5>
+                    <p class="card-text">{{$f->user_nama}}</p>
+                        <a href="/detail/{{$f->apartment_id}}" class="btn btn-primary">More Detail</a>
+                        <a href="/deleteFavorit/{{$f->favorit_id}}" class="btn btn-danger">Delete Favorit</a>
                     </div>
                 </div>
             @endif
