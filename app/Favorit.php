@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Favorit extends Model
 {
-    protected $table = 'favorite';
+    protected $table = 'favorit';
     protected $primaryKey = "favorite_id";
     public $incrementing = true;
     protected $fillable = [

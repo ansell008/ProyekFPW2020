@@ -59,7 +59,7 @@
             <h4>New Password : </h4>
         </div>
         <div class="mt-10">
-            <input type="text" placeholder="Enter New Password" name="password"  value=""  class="single-input">
+            <input type="password" placeholder="Enter New Password" name="password"  value=""  class="single-input">
         </div>
         <br>
         <div class="typography">
