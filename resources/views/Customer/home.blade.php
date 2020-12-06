@@ -39,18 +39,25 @@
      <br>
 @endif
 <div class="luar">
-    <a href="/halamanFavorit" class="btn btn-primary">Favorit</a> <br>
+    <a href="/halamanFavorit" class="btn btn-danger float-right">Favorit</a><a href="/halamanHistory" style="margin-right: 5px;" class="btn btn-info float-right">History</a> &nbsp;&nbsp;<br>
     <div class="satu" style="height: 500px; ">
         <h1 class="display-4">Recommended</h1>
         @isset($rekom)
         @foreach ($rekom as $p)
-        @if ($p->apartment_status == 1)
+        @if ($p->apartment_status == 0)
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
                 <div class="card-body">
                 <h5 class="card-title">{{$p->apartment_nama}}</h5>
                 <p class="card-text">{{$p->user_nama}}
                 </p>
+                @for ($i = 0; $i < $p->apartment_rating; $i++)
+                    {{'⭐'}}
+                @endfor
+                @for ($i = 0; $i < 5- $p->apartment_rating; $i++)
+                    {{'✰'}}
+                @endfor
+                <br><br>
                     <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
 
             </div>
@@ -64,12 +71,20 @@
         <h1 class="display-4">All</h1>
         @isset($posting)
             @foreach ($posting as $p)
-                @if ($p->apartment_status == 1)
+                @if ($p->apartment_status == 0)
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">{{$p->apartment_nama}}</h5>
                         <p class="card-text">{{$p->user_nama}}</p>
+                        @for ($i = 0; $i < $p->apartment_rating; $i++)
+                            {{'⭐'}}
+                        @endfor
+                        @for ($i = 0; $i < 5- $p->apartment_rating; $i++)
+                            {{'✰'}}
+                        @endfor
+                        <br><br>
+
                             <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
 
                         </div>

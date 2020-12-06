@@ -53,3 +53,11 @@ Route::any('/search', "CustomerController@search");
 Route::post('/favorit', "CustomerController@favorit");
 Route::get('/deleteFavorit/{id}', 'CustomerController@deleteFavorit');
 Route::get('/halamanFavorit', "CustomerController@toFavorit");
+
+Route::get('/halamanHistory', 'CustomerController@history');
+
+Route::get('/detailTransaksi/{id}', 'CustomerController@detailTransaksi');
+Route::get('/viewdetailtransaksi', 'CustomerController@viewDetailTransaksi');
+
+Route::post('/review/{id}', 'CustomerController@review');
+
