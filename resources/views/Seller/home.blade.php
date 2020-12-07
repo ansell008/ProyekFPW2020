@@ -35,6 +35,11 @@
 
 @php
     $ctr = 1;
+    if ($transaksi>0)
+    {
+        $message = "Terdapat $transaksi Transaksi Yang Perlu Diterima";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
 @endphp
 
 @section('content')

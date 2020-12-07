@@ -63,14 +63,18 @@
                     <td>{{$item->apartment_id}}</td>
                     <td>Rp @currency($item->transaksi_total_harga)</td>
                     <td>{{$item->created_at}}</td>
-                    @if ($item->transaksi_status == 0)
-                        <td><span class="badge badge-success">Transaksi Selesai</span></td>
+                    @if ($item->apartment_status == 1)
+                        <td><span class="badge badge-danger">Not Available</span></td>
                     @else
-                        <td><span class="badge badge-danger">Transaksi Belum Selesai</span></td>
+                        @if ($item->transaksi_status == 1)
+                            <td><span class="badge badge-success">Transaksi Selesai</span></td>
+                        @else
+                            <td><span class="badge badge-danger">Transaksi Belum Selesai</span></td>
+                        @endif
                     @endif
                     <td>
-                        @if ($item->transaksi_status == 0)
-                            <a type="button" class="genric-btn success radius" href="#" disabled="disabled">Accept</a>
+                        @if (($item->transaksi_status == 1)||($item->apartment_status == 1))
+                            <a type="button" class="btn genric-btn success radius disabled" href="#" >Accept</a>
                         @else
                             <a type="button" class="genric-btn success radius" href="/terimatransaksi/{{$item->transaksi_id}}">Accept</a>
                         @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Apartment;
 use App\Kategori;
 use App\Kota;
@@ -20,8 +21,9 @@ class SellerController extends Controller
         $allApartment = Apartment::all();
         $allUser = User::all();
         $aktif_user = $req->session()->get("aktif_user");
-
-        return view("Seller.home", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allUser" => $allUser]);
+        $transaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id and a.apartment_status=0 and t.transaksi_status=0');
+        $count=count($transaksi);
+        return view("Seller.home", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allUser" => $allUser, "transaksi" => $count]);
     }
 
     public function goToEditProfile(Request $req){
@@ -218,7 +220,7 @@ class SellerController extends Controller
     {
         $aktif_user = $req->session()->get("aktif_user");
         $allApartment = Apartment::all();
-        $allTransaksi=Transaksi::all();
+        $allTransaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id');
         return view("Seller.listOrder", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allTransaksi" => $allTransaksi]);
     }
 
