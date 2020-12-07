@@ -19,4 +19,8 @@ class Transaksi extends Model
         'updated_at'
     ];
     public $timestamps = true;
+
+    public function apartTransaksi(){
+        return $this->hasOne('App\Apartment', 'apartment_id');
+    }
 }

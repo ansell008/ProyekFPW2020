@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Favorit;
+use App\Review;
+use App\Transaksi;
 
 class CustomerController extends Controller
 {
@@ -82,8 +85,7 @@ class CustomerController extends Controller
             'apartment_id'=>$req->idap,
             'created_at'=>$mytime
         ]);
-        $req->session()->put('beli',"berhasil menambah favorit!");
-        return redirect("/homecustomer");
+        return redirect("/homecustomer")->with('beli',"berhasil menambah favorit!");
     }
 
     public function deleteFavorit(Request $req, $id)
@@ -117,8 +119,7 @@ class CustomerController extends Controller
             'created_at'=>$tgl,
             'updated_at'=>$tgl
         ]);
-        $req->session()->put('beli',"berhasil melakukan transaksi!");
-        return redirect("/homecustomer");
+        return redirect("/homecustomer")->with('beli',"berhasil melakukan transaksi!");
     }
 
     public function sewa(Request $req)
@@ -136,7 +137,63 @@ class CustomerController extends Controller
             'transaksi_tanggal_beli'=>$mytime,
             'created_at'=>$tgl
         ]);
-        $req->session()->put('beli',"berhasil melakukan transaksi!");
-        return redirect("/homecustomer");
+        return redirect("/homecustomer")->with('beli',"berhasil melakukan transaksi!");
     }
+
+    public function history(Request $req){
+        $aktif_user = $req->session()->get("aktif_user");
+        $transaksi =Transaksi::where('user_id','=',$aktif_user->user_id)->get();
+
+        return view("Customer.historyCustomer",["allApartment"=>$transaksi,"aktif_user"=>$aktif_user ]);
+    }
+
+    public function detailTransaksi(Request $req, $id ){
+        $req->session()->put("idTransaksi", $id);
+        return redirect("/viewdetailtransaksi");
+    }
+    public function viewDetailTransaksi(Request $req)
+    {
+        $id = $req->session()->get("idTransaksi");
+        $apartment = Transaksi::find($id);
+        $aktif_user = $req->session()->get("aktif_user");
+        $counts = DB::select('select count(*) as jum from review where user_id = "'.$aktif_user->user_id.'" and apartment_id= "'.$apartment->apartment_id.'" ');
+        // dd($counts);
+
+
+        return view("Customer.detailHistory", [
+            "aktif_user" => $aktif_user,
+            "transaksi" => $apartment,
+            "counts"=>$counts
+        ]);
+    }
+
+    public function review(Request $req, $id){
+        $aktif_user = $req->session()->get("aktif_user");
+        $validateData = $req->validate(
+            [
+                "rating" => ['numeric','min:1','max:5']
+            ],
+            [
+                "numeric" => "Rating must be number"
+            ]
+        );
+
+        Review::create([
+            "user_id"=>$aktif_user->user_id,
+            "apartment_id"=> $id,
+            "review_rate"=>$validateData["rating"],
+            "review_isi"=>$req->review,
+            "created_at"=>time()
+        ]);
+        $apart = Apartment::find($id);
+        $counts = DB::select('select avg(review_rate) as jum from review where apartment_id= "'.$apart->apartment_id.'" ');
+
+
+
+        $apart->apartment_rating = $counts[0]->jum;
+        $apart->save();
+
+        return redirect("/viewdetailtransaksi")->with('review',"Review Sukses");
+    }
+
 }
