@@ -40,6 +40,7 @@ Route::get('/deleteapartment', 'SellerController@DeleteApartment');
 Route::get('/editProfilePage', 'SellerController@goToEditProfile');
 Route::post('/editProfile', 'SellerController@editProfile');
 Route::get('/terimatransaksi/{id}', 'SellerController@terimaTransaksi');
+Route::get('/selesaiSewa/{id}', 'SellerController@selesaiSewa');
 
 Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
