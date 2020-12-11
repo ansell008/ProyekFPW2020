@@ -80,8 +80,8 @@
                                         <td><span class="badge badge-danger">Not Available</span></td>
                                     @else
                                         <td>
-                                            <span class="badge badge-success">Not Available</span> <br>
-                                            <a type="button" class="genric-btn danger radius" href="/selesaiSewa/{{$item->apaertment_id}}">Selesaikan Masa Sewa</a>
+                                            <span class="badge badge-danger">Not Available</span> <br>
+                                            <a type="button" class="genric-btn danger radius" href="/selesaiSewa/{{$item->apartment_id}}">Selesaikan Masa Sewa</a>
                                         </td>
                                     @endif
                                 @endif

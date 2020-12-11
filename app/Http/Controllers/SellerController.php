@@ -21,7 +21,7 @@ class SellerController extends Controller
         $allApartment = Apartment::all();
         $allUser = User::all();
         $aktif_user = $req->session()->get("aktif_user");
-        $transaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id and a.apartment_status=0 and t.transaksi_status=1');
+        $transaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id and a.apartment_status=0 and t.transaksi_status=0');
         $count=count($transaksi);
         return view("Seller.home", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allUser" => $allUser, "transaksi" => $count]);
     }
@@ -228,7 +228,7 @@ class SellerController extends Controller
     {
         Transaksi::where('transaksi_id', $id)
             ->update([
-                "transaksi_status" => 0
+                "transaksi_status" => 1
             ]);
         $transaksi = Transaksi::find($id);
         Apartment::where('apartment_id', $transaksi->apartment_id)
