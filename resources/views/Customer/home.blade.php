@@ -51,12 +51,19 @@
                 <h5 class="card-title">{{$p->apartment_nama}}</h5>
                 <p class="card-text">{{$p->user_nama}}
                 </p>
-                @for ($i = 0; $i < $p->apartment_rating; $i++)
-                    {{'⭐'}}
+                @for ($j = 0; $j < count($rating); $j++)
+                    @if ($rating[$j]->user_id==$p->user_id)
+                        @for ($i = 0; $i < $rating[$j]->avg; $i++)
+                            {{'⭐'}}
+                        @endfor
+                        @for ($i = 0; $i < 5- $rating[$j]->avg; $i++)
+                            {{'✰'}}
+                        @endfor
+                    @else
+
+                    @endif
                 @endfor
-                @for ($i = 0; $i < 5- $p->apartment_rating; $i++)
-                    {{'✰'}}
-                @endfor
+
                 <br><br>
                     <a href="/detail/{{$p->apartment_id}}" class="btn btn-primary">More Detail</a>
 
@@ -77,11 +84,18 @@
                         <div class="card-body">
                         <h5 class="card-title">{{$p->apartment_nama}}</h5>
                         <p class="card-text">{{$p->user_nama}}</p>
-                        @for ($i = 0; $i < $p->apartment_rating; $i++)
-                            {{'⭐'}}
-                        @endfor
-                        @for ($i = 0; $i < 5- $p->apartment_rating; $i++)
-                            {{'✰'}}
+                        @for ($j = 0; $j < count($rating); $j++)
+                            @if ($rating[$j]->user_id==$p->user_id)
+
+                                @for ($i = 0; $i < ceil($rating[$j]->avg); $i++)
+                                    {{'⭐'}}
+                                @endfor
+                                @for ($i = 0; $i < 5- ceil($rating[$j]->avg); $i++)
+                                    {{'✰'}}
+                                @endfor
+                            @else
+
+                            @endif
                         @endfor
                         <br><br>
 
