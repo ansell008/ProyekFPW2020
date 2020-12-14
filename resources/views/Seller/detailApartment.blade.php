@@ -32,6 +32,23 @@
     float: right;
 }
 
+
+#imgView{
+    padding:5px;
+}
+.loadAnimate{
+    animation:setAnimate ease 2.5s infinite;
+}
+@keyframes setAnimate{
+    0%  {color: #000;}
+    50% {color: transparent;}
+    99% {color: transparent;}
+    100%{color: #000;}
+}
+.custom-file-label{
+    cursor:pointer;
+}
+
 </style>
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -154,8 +171,18 @@
             <h4>Select Photo</h4>
         </div>
         <div class="mt-10">
-        <img src="storage/{{$apartment->apartment_foto}}" width="150px" height="150px" alt=""><br><br>
+            <div class="imgWrap" style="width: 300px; height: 300px;">
+                <img src="storage/{{$apartment->apartment_foto}}" id="imgView" class="card-img-top img-fluid" >
+            </div>
+
+            <div class="custom-file">
+                <input type="file" name="foto" id="inputFile"  placeholder="Apartment Name" class="imgFile custom-file-input" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputFile">Choose file</label>
+            </div>
+
+        {{-- <img src="storage/{{$apartment->apartment_foto}}" width="150px" height="150px" alt=""><br><br>
             <input type="file" id="foto" name="foto" placeholder="Apartment Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apartment Name'"  class="single-input">
+        </div> --}}
         </div>
         <br>
         <div class="typography">
@@ -205,7 +232,38 @@
             });
         });
 
+        $("#inputFile").change(function(event) {
+      fadeInAdd();
+      getURL(this);
+    });
 
+    $("#inputFile").on('click',function(event){
+      fadeInAdd();
+    });
+
+    function getURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var filename = $("#inputFile").val();
+        filename = filename.substring(filename.lastIndexOf('\\')+1);
+        reader.onload = function(e) {
+          debugger;
+          $('#imgView').attr('src', e.target.result);
+          $('#imgView').hide();
+          $('#imgView').fadeIn(500);
+          $('.custom-file-label').text(filename);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+      $(".alert").removeClass("loadAnimate").hide();
+    }
+
+    function fadeInAdd(){
+      fadeInAlert();
+    }
+    function fadeInAlert(text){
+      $(".alert").text(text).addClass("loadAnimate");
+    }
 
 </script>
 @endsection

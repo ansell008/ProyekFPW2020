@@ -46,7 +46,7 @@ Route::get('/viewlistorder', 'SellerController@viewListOrder');
 
 Route::get('/detail/{id}', 'CustomerController@detail');
 Route::get('/detail', 'CustomerController@showdetail');
-Route::get('/detailsewa','CustomerController@showdetailsewa');
+Route::get('/detailsewa', 'CustomerController@showdetailsewa');
 Route::any('/ubahkota', "CustomerController@ubahkota");
 Route::any('/beli', "CustomerController@beli");
 Route::any('/sewa', "CustomerController@sewa");
@@ -61,4 +61,3 @@ Route::get('/detailTransaksi/{id}', 'CustomerController@detailTransaksi');
 Route::get('/viewdetailtransaksi', 'CustomerController@viewDetailTransaksi');
 
 Route::post('/review/{id}', 'CustomerController@review');
-
