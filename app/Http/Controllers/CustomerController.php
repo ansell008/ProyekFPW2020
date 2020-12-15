@@ -58,16 +58,16 @@ class CustomerController extends Controller
         $penjual = DB::select('select user_id from apartment where apartment_id = ?', [$id]);
         $posting = DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apartment_id=?', [$id]);
 
-        $review=DB::select('select * from review r , user u, apartment a where r.apartment_id=a.apartment_id and a.user_id = u.user_id and u.user_id = ?', [$penjual[0]->user_id]);
-        if($posting[0]->kategori_id==1){
-            $req->session()->put('posting',$posting[0]);
-            $req->session()->put('review',$review);
-            $req->session()->put('penjual',$penjual);
+        $review = DB::select('select * from review r , user u, apartment a where r.apartment_id=a.apartment_id and a.user_id = u.user_id and u.user_id = ?', [$penjual[0]->user_id]);
+        if ($posting[0]->kategori_id == 1) {
+            $req->session()->put('posting', $posting[0]);
+            $req->session()->put('review', $review);
+            $req->session()->put('penjual', $penjual);
             return redirect("/detail");
-        }else{
-            $req->session()->put('posting',$posting[0]);
-            $req->session()->put('review',$review);
-            $req->session()->put('penjual',$penjual);
+        } else {
+            $req->session()->put('posting', $posting[0]);
+            $req->session()->put('review', $review);
+            $req->session()->put('penjual', $penjual);
 
             return redirect("/detailsewa");
         }
@@ -79,23 +79,22 @@ class CustomerController extends Controller
     {
         $aktif_user = $req->session()->get("aktif_user");
 
-        $posting=$req->session()->get('posting');
-        $review=$req->session()->get('review');
-        $penjual=$req->session()->get('penjual');
+        $posting = $req->session()->get('posting');
+        $review = $req->session()->get('review');
+        $penjual = $req->session()->get('penjual');
         $rating = DB::select("SELECT user_id, avg(apartment_rating) as 'avg' FROM apartment WHERE apartment_rating!=0 GROUP by user_id");
         // dd($review);
-        return view("Customer.detail",['dipilih' => $posting, 'aktif_user' => $aktif_user,'review'=>$review,'rating'=>$rating]);
+        return view("Customer.detail", ['dipilih' => $posting, 'aktif_user' => $aktif_user, 'review' => $review, 'rating' => $rating]);
     }
     public function showdetailsewa(Request $req)
     {
         $aktif_user = $req->session()->get("aktif_user");
 
-        $posting=$req->session()->get('posting');
-        $review=$req->session()->get('review');
+        $posting = $req->session()->get('posting');
+        $review = $req->session()->get('review');
         $rating = DB::select("SELECT user_id, avg(apartment_rating) as 'avg' FROM apartment WHERE apartment_rating!=0 GROUP by user_id");
 
-        return view("Customer.detailsewa",['dipilih' => $posting, 'aktif_user' => $aktif_user,'review'=>$review,'rating'=>$rating]);
-
+        return view("Customer.detailsewa", ['dipilih' => $posting, 'aktif_user' => $aktif_user, 'review' => $review, 'rating' => $rating]);
     }
     public function favorit(Request $req)
     {

@@ -21,16 +21,18 @@ class SellerController extends Controller
         $allApartment = Apartment::all();
         $allUser = User::all();
         $aktif_user = $req->session()->get("aktif_user");
-        $transaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id and a.apartment_status=0 and t.transaksi_status=0');
-        $count=count($transaksi);
+        $transaksi = DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id and t.transaksi_status=0');
+        $count = count($transaksi);
         return view("Seller.home", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allUser" => $allUser, "transaksi" => $count]);
     }
 
-    public function goToEditProfile(Request $req){
+    public function goToEditProfile(Request $req)
+    {
         $aktif_user = $req->session()->get("aktif_user");
         return view('Seller.editProfile', ["aktif_user" => $aktif_user]);
     }
-    public function editProfile(Request $req){
+    public function editProfile(Request $req)
+    {
         $id = $req->session()->get("aktif_user")->user_id;
         $pass = $req->password;
         $email = $req->email;
@@ -39,7 +41,7 @@ class SellerController extends Controller
 
         $updateP = User::find($id);
         $updateP->user_email = $email;
-        if($pass!=""){
+        if ($pass != "") {
             $updateP->user_password  = sha1($pass);
         }
         $updateP->user_nama = $nama;
@@ -51,15 +53,13 @@ class SellerController extends Controller
             $foto = null;
         }
         $updateP->save();
-        $req->session()->put('aktif_user',$updateP);
+        $req->session()->put('aktif_user', $updateP);
 
-        if($updateP->user_tipe==0){
-            return redirect("/homeseller")->with('update','Berhasil Update Profil');
-        }else{
-            return redirect("/homecustomer")->with('update','Berhasil Update Profil');
+        if ($updateP->user_tipe == 0) {
+            return redirect("/homeseller")->with('update', 'Berhasil Update Profil');
+        } else {
+            return redirect("/homecustomer")->with('update', 'Berhasil Update Profil');
         }
-
-
     }
 
     public function viewAddApartment(Request $req)
@@ -220,8 +220,11 @@ class SellerController extends Controller
     {
         $aktif_user = $req->session()->get("aktif_user");
         $allApartment = Apartment::all();
-        $allTransaksi=DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id');
-        return view("Seller.listOrder", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allTransaksi" => $allTransaksi]);
+        $allTransaksi = DB::select('select * from apartment a,transaksi t where a.apartment_id=t.apartment_id');
+        $allUser = User::all();
+
+
+        return view("Seller.listOrder", ["aktif_user" => $aktif_user, "allApartment" => $allApartment, "allTransaksi" => $allTransaksi, "allUser" => $allUser]);
     }
 
     public function terimaTransaksi(Request $req, $id)
@@ -232,18 +235,23 @@ class SellerController extends Controller
             ]);
         $transaksi = Transaksi::find($id);
         Apartment::where('apartment_id', $transaksi->apartment_id)
-        ->update([
-            "apartment_status" => 1
-        ]);
+            ->update([
+                "apartment_status" => 1
+            ]);
         return redirect("/homeseller");
     }
 
-    public function selesaiSewa(Request $req, $id)
+    public function selesaiSewa(Request $req, $id, $idA)
     {
-        Apartment::where('apartment_id', $id)
-        ->update([
-            "apartment_status" => 0
-        ]);
+        Apartment::where('apartment_id', $idA)
+            ->update([
+                "apartment_status" => 0
+            ]);
+
+        Transaksi::where('transaksi_id', $id)
+            ->update([
+                "transaksi_status" => 2
+            ]);
         return redirect("/homeseller");
     }
 }

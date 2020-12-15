@@ -46,7 +46,7 @@
     <h5>{{$dipilih->user_nama}}</h5>
     <h5>{{$dipilih->user_email}}</h5>
     <h5>{{$dipilih->user_notelp}}</h5>
-    <h5>Rating: {{$dipilih->apaartment_rating}}</h5>
+    <h5>Rating: {{$dipilih->apartment_rating}}</h5>
     <h3>Review</h3>
     @isset($review)
     <div class="list-group">

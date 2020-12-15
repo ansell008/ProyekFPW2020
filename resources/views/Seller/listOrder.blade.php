@@ -60,24 +60,49 @@
             @foreach ($allTransaksi as $item)
                 <tr>
                     <td>{{$ctr}}</td>
-                    <td>{{$item->apartment_id}}</td>
+                    <td>
+                        @foreach ($allUser as $user)
+                            @if ($user->user_id == $item->user_id)
+                                {{$user->user_nama}}
+                            @endif
+                        @endforeach</td>
                     <td>Rp @currency($item->transaksi_total_harga)</td>
                     <td>{{$item->created_at}}</td>
-                    @if ($item->apartment_status == 1)
-                        @if ($item->transaksi_status==1)
+
+                        {{-- @if ($item->transaksi_status==1)
                             <td><span class="badge badge-success">Transaksi Selesai</span></td>
                         @else
                             <td><span class="badge badge-danger">Not Available</span></td>
-                        @endif
-                    @else
-                        @if ($item->transaksi_status==1)
+                        @endif --}}
+
+                        @if ($item->transaksi_status==1 || $item->transaksi_status==2)
                             <td><span class="badge badge-success">Transaksi Selesai</span></td>
                         @else
                             <td><span class="badge badge-danger">Transaksi Belum Selesai</span></td>
                         @endif
-                    @endif
+
                     <td>
-                        @if (($item->transaksi_status == 1)||($item->apartment_status == 1))
+                        @if (($item->transaksi_status == 1))
+                            @php
+                                $sewa = false;
+                            @endphp
+
+                            @foreach ($allApartment as $apart)
+                                @if ($apart->apartment_id == $item->apartment_id)
+                                    @if ($apart->kategori_id == 2 && $apart->apartment_status == 1)
+                                        @php
+                                            $sewa = true;
+                                        @endphp
+                                    @endif
+                                @endif
+                            @endforeach
+
+                            @if ($sewa == true)
+                                <a type="button" class="genric-btn danger radius" href="/selesaiSewa/{{$item->transaksi_id}}/{{$item->apartment_id}}">Selesaikan Masa Sewa</a>
+                            @else
+                                <a type="button" class="btn genric-btn success radius disabled" href="#" >Accept</a>
+                            @endif
+                        @elseif(($item->transaksi_status == 2))
                             <a type="button" class="btn genric-btn success radius disabled" href="#" >Accept</a>
                         @else
                             <a type="button" class="genric-btn success radius" href="/terimatransaksi/{{$item->transaksi_id}}">Accept</a>
