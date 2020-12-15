@@ -44,12 +44,13 @@
         <h1 class="display-4">Recommended</h1>
         @isset($rekom)
         @foreach ($rekom as $p)
-        @if ($p->apartment_status == 0)
+        @if ($p->apartment_status == 1)
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
                 <div class="card-body">
                 <h5 class="card-title">{{$p->apartment_nama}}</h5>
-                <p class="card-text">{{$p->user_nama}}
+                <p class="card-text">POST BY: {{$p->user_nama}}
+                   <br> Located at:{{$p->apartment_alamat}}
                 </p>
                 @for ($j = 0; $j < count($rating); $j++)
                     @if ($rating[$j]->user_id==$p->user_id)
@@ -78,12 +79,14 @@
         <h1 class="display-4">All</h1>
         @isset($posting)
             @foreach ($posting as $p)
-                @if ($p->apartment_status == 0)
+                @if ($p->apartment_status == 1)
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="storage/{{$p->apartment_foto}}" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">{{$p->apartment_nama}}</h5>
-                        <p class="card-text">{{$p->user_nama}}</p>
+                        <p class="card-text">POST BY: {{$p->user_nama}}
+                            <br>Located at:{{$p->apartment_alamat}}
+                        </p>
                         @for ($j = 0; $j < count($rating); $j++)
                             @if ($rating[$j]->user_id==$p->user_id)
 

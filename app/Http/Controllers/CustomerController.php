@@ -17,9 +17,9 @@ class CustomerController extends Controller
     {
         $aktif_user = $req->session()->get("aktif_user");
         $negara = DB::table('negara')->get();
-        $rekom=DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apartment_rating>=4');
+        $rekom=DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apaartment_rating>=4');
         $posting = DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id');
-        $rating = DB::select("SELECT user_id, avg(apartment_rating) as 'avg' FROM apartment WHERE apartment_rating!=0 GROUP by user_id");
+        $rating = DB::select("SELECT user_id, avg(apaartment_rating) as 'avg' FROM apartment WHERE apaartment_rating!=0 GROUP by user_id");
 
         //dd($posting);view_ra
         return view("Customer.home", ["aktif_user" => $aktif_user, "negara" => $negara, "posting" => $posting,"rekom"=>$rekom,"rating"=>$rating]);

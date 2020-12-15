@@ -18,13 +18,17 @@
   }
 </style>
 
-<div class="luar">
+<div class="luar" style="text-align: center">
     <button  class="btn btn-secondary"><a href="/homecustomer">BACK</a></button>
     <form action="/sewa" method="POST">
     @csrf
     <h1>{{$dipilih->apartment_nama}}</h1>
     <img src="storage/{{$dipilih->apartment_foto}}" alt="" style="width: 500px;height:400px">
     <h3>{{$dipilih->user_nama}}</h3>
+    <h2>POST BY: {{$dipilih->apartment_deskripsi}}</h2>
+    <h2>Located at: {{$dipilih->apartment_alamat}}</h2>
+    <h3>POST BY: {{$dipilih->user_nama}}</h3>
+    <h4><b>since: {{$dipilih->apartment_tahun_bangun}}</b></h4>
     <h5>{{$dipilih->apartment_harga}}</h5>
     <div class="form-group" style="width: 100px;display:inline">
 
