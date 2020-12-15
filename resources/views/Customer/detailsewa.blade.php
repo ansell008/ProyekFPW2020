@@ -29,7 +29,7 @@
     <h2>Located at: {{$dipilih->apartment_alamat}}</h2>
 
     <h4><b>since: {{$dipilih->apartment_tahun_bangun}}</b></h4>
-    <h5>{{$dipilih->apartment_harga}}</h5>
+    <h5>Rp @currency($dipilih->apartment_harga)</h5>
     <div class="form-group" style="width: 100px;display:inline">
 
         <input type="date" name="selesai">

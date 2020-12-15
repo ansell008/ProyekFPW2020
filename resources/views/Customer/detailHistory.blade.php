@@ -15,7 +15,10 @@
 
   }
 </style>
-@if (session()->has("review"))
+{{-- @php
+    dd(session()->get("review"));
+@endphp --}}
+@if (session()->get("review")!=null)
     <div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("review")}}</b></div>
     <br>
 @endif
@@ -41,7 +44,7 @@
                 <b>Tanggal Selesai : </b> {{date_format($date_return,"d-m-Y")}}
             @endif
             <br>
-            <b>Total Harga : </b> {{$transaksi->transaksi_total_harga}} <br>
+            <b>Total Harga : </b>Rp @currency($transaksi->transaksi_total_harga) <br>
 
         </div>
 

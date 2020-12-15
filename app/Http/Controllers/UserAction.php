@@ -39,7 +39,7 @@ class UserAction extends Controller
                 "user_nama" => $req->nama,
                 "user_notelp" => $validateData["notelp"],
                 "user_tipe" => $req->tipe,
-                "user_photo" => "default_pic.png",
+                "user_photo" => "profile-pict/profil.png",
                 "created_at" => time(),
                 "updated_at" => time()
             ]);
