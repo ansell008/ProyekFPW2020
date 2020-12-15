@@ -41,11 +41,12 @@
     </form>
     <br>
     <br>
+    <div style="height: 2px;background-color:black"></div>
     <h3>POST BY: </h3>
     <h5>{{$dipilih->user_nama}}</h5>
     <h5>{{$dipilih->user_email}}</h5>
     <h5>{{$dipilih->user_notelp}}</h5>
-    <h1>REView</h1>
+    <h3>Review</h3>
     @isset($review)
     <div class="list-group">
         @foreach ($review as $r)
