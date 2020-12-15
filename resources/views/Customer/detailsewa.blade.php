@@ -27,7 +27,7 @@
     <h3>{{$dipilih->user_nama}}</h3>
 
     <h2>Located at: {{$dipilih->apartment_alamat}}</h2>
-    <h3>POST BY: {{$dipilih->user_nama}}</h3>
+
     <h4><b>since: {{$dipilih->apartment_tahun_bangun}}</b></h4>
     <h5>{{$dipilih->apartment_harga}}</h5>
     <div class="form-group" style="width: 100px;display:inline">
@@ -46,6 +46,7 @@
     <h5>{{$dipilih->user_nama}}</h5>
     <h5>{{$dipilih->user_email}}</h5>
     <h5>{{$dipilih->user_notelp}}</h5>
+    <h5>Rating: {{$dipilih->apaartment_rating}}</h5>
     <h3>Review</h3>
     @isset($review)
     <div class="list-group">
