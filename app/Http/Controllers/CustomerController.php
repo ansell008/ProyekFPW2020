@@ -115,7 +115,7 @@ class CustomerController extends Controller
             'apartment_id'=>$req->idap,
             'user_id'=>$req->idus,
             'transaksi_status'=>0,
-            'transaksi_tanggal_selesai'=>null,
+            'transaksi_tanggal_selesai'=>$mytime,
             'transaksi_total_harga'=>$req->harga,
             'transaksi_tanggal_beli'=>$mytime,
             'created_at'=>$tgl,
