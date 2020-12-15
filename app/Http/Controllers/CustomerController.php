@@ -110,12 +110,12 @@ class CustomerController extends Controller
     {
         $mytime = date('Y-m-d H:i:s');
         $tgl=date('Y-m-d');
-        DB::update('update apartment set apartment_status = 0 where apartment_id = ?', [$req->idap]);
+        DB::update('update apartment set apartment_status = 1 where apartment_id = ?', [$req->idap]);
         DB::table('transaksi')->insert([
             'apartment_id'=>$req->idap,
             'user_id'=>$req->idus,
             'transaksi_status'=>0,
-            'transaksi_tanggal_selesai'=>$mytime,
+            'transaksi_tanggal_selesai'=>null,
             'transaksi_total_harga'=>$req->harga,
             'transaksi_tanggal_beli'=>$mytime,
             'created_at'=>$tgl,
@@ -129,7 +129,7 @@ class CustomerController extends Controller
         $mytime = date('Y-m-d H:i:s');
         $tgl=date('Y-m-d');
         $selesai=$req->selesai;
-        DB::update('update apartment set apartment_status = 0 where apartment_id = ?', [$req->idap]);
+        DB::update('update apartment set apartment_status = 1 where apartment_id = ?', [$req->idap]);
         DB::table('transaksi')->insert([
             'apartment_id'=>$req->idap,
             'user_id'=>$req->idus,
