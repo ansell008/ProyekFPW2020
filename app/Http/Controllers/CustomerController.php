@@ -56,7 +56,7 @@ class CustomerController extends Controller
         $aktif_user = $req->session()->get("aktif_user");
         $review=DB::select('select * from review r , user u where u.user_id=r.user_id and r.apartment_id = ?', [$id]);
         $posting = DB::select('select * from apartment a,user u, tipe_apartment tp,kategori ka,negara n ,kota ko where a.user_id=u.user_id and a.tipe_apartment_id=tp.tipe_apartment_id and a.kategori_id=ka.kategori_id and a.negara_id=n.negara_id and a.kota_id=ko.kota_id and a.apartment_id=?', [$id]);
-<<<<<<< Updated upstream
+
         if($posting[0]->kategori_id==1){
             $req->session()->put('posting',$posting[0]);
             $req->session()->put('review',$review);
@@ -64,13 +64,7 @@ class CustomerController extends Controller
         }else{
             $req->session()->put('posting',$posting[0]);
             $req->session()->put('review',$review);
-=======
-        if ($posting[0]->kategori_id == 1) {
-            $req->session()->put('posting', $posting[0]);
-            return redirect("/detail");
-        } else {
-            $req->session()->put('posting', $posting[0]);
->>>>>>> Stashed changes
+
             return redirect("/detailsewa");
         }
         //return view("Customer.detail", ['dipilih' => $posting[0], 'aktif_user' => $aktif_user]);
@@ -80,26 +74,19 @@ class CustomerController extends Controller
     public function showdetail(Request $req)
     {
         $aktif_user = $req->session()->get("aktif_user");
-<<<<<<< Updated upstream
+
         $posting=$req->session()->get('posting');
         $review=$req->session()->get('review');
         return view("Customer.detail",['dipilih' => $posting, 'aktif_user' => $aktif_user,'review'=>$review]);
-=======
-        $posting = $req->session()->get('posting');
-        return view("Customer.detail", ['dipilih' => $posting, 'aktif_user' => $aktif_user]);
->>>>>>> Stashed changes
     }
     public function showdetailsewa(Request $req)
     {
         $aktif_user = $req->session()->get("aktif_user");
-<<<<<<< Updated upstream
+
         $posting=$req->session()->get('posting');
         $review=$req->session()->get('review');
         return view("Customer.detailsewa",['dipilih' => $posting, 'aktif_user' => $aktif_user,'review'=>$review]);
-=======
-        $posting = $req->session()->get('posting');
-        return view("Customer.detailsewa", ['dipilih' => $posting, 'aktif_user' => $aktif_user]);
->>>>>>> Stashed changes
+
     }
     public function favorit(Request $req)
     {
