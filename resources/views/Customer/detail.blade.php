@@ -25,10 +25,7 @@
     <img src="storage/{{$dipilih->apartment_foto}}" alt="" style="width: 500px;height:400px">
     <h2>POST BY: {{$dipilih->apartment_deskripsi}}</h2>
     <h2>Located at: {{$dipilih->apartment_alamat}}</h2>
-    <h3>POST BY: </h3>
-    <h5>{{$dipilih->user_nama}}</h5>
-    <h5>{{$dipilih->user_email}}</h5>
-    <h5>{{$dipilih->user_notelp}}</h5>
+
     <h4><b>since: {{$dipilih->apartment_tahun_bangun}}</b></h4>
     <h5>{{$dipilih->apartment_harga}}</h5>
     <div class="form-group" style="width: 100px;display:inline">
@@ -39,7 +36,13 @@
     <input type="hidden" name="harga" value="{{$dipilih->apartment_harga}}">
     <button type="submit" class="btn btn-success">BUY</button>
     </form>
-    <h1>REView</h1>
+    <br>
+    <br>
+    <h3>POST BY: </h3>
+    <h5>{{$dipilih->user_nama}}</h5>
+    <h5>{{$dipilih->user_email}}</h5>
+    <h5>{{$dipilih->user_notelp}}</h5>
+    <h1>REViEW</h1>
     @isset($review)
     <div class="list-group">
         @foreach ($review as $r)
