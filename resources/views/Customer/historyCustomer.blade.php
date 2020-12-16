@@ -46,10 +46,10 @@
                         <td>{{$apart['apartment_nama']}}</td>
                         <td>Rp @currency($item->transaksi_total_harga)</td>
                         <td>{{$item->transaksi_tanggal_beli}}</td>
-                        @if ($item->transaksi_status == 0)
-                            <td><span class="badge badge-danger">Not Approved</span></td>
-                        @else
+                        @if ($item->transaksi_status == 1 || $item->transaksi_status == 2)
                             <td><span class="badge badge-success">Approved</span></td>
+                        @else
+                            <td><span class="badge badge-danger">Not Approved</span></td>
                         @endif
                         <td>
                             <a type="button" class="genric-btn success radius" href="/detailTransaksi/{{$item->transaksi_id}}">Detail</a>
