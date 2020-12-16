@@ -216,6 +216,6 @@ class CustomerController extends Controller
         $apart->apartment_rating = $counts[0]->jum;
         $apart->save();
 
-        return redirect("/viewdetailtransaksi")->with('review', "Review Sukses");
+        return redirect("/viewdetailtransaksi")->with('review123', "Review Sukses");
     }
 }

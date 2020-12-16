@@ -16,10 +16,10 @@
   }
 </style>
 {{-- @php
-    dd(session()->get("review"));
+    dd(session()->get("review123"));
 @endphp --}}
-@if (session()->get("review")!=null)
-    <div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("review")}}</b></div>
+@if (session()->get("review123")!=null)
+    <div class="" style="text-align: center;background-color:green"><b style="color: white">{{session("review123")}}</b></div>
     <br>
 @endif
 <div class="luar">
